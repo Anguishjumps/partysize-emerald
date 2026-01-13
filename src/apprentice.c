@@ -557,19 +557,13 @@ static void CreateApprenticeMenu(u8 menu)
         strings[0] = gText_Lv50;
         strings[1] = gText_OpenLevel;
         break;
-    case APPRENTICE_ASK_3SPECIES:
-        count = MULTI_PARTY_SIZE;
+    case APPRENTICE_ASK_3SPECIES: //Changed. I dont care about this.
         left = 18;
-        top = 6;
-        for (i = 0; i < MULTI_PARTY_SIZE; i++)
-        {
-            u16 species;
-            u32 speciesTableId;
-
-            speciesTableId = APPRENTICE_SPECIES_ID(i);
-            species =  gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
-            strings[i] = GetSpeciesName(species);
-        }
+        top = 8;
+        if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS)
+            return;
+        strings[1] = GetSpeciesName(gApprenticeQuestionData->altSpeciesId);
+        strings[0] = GetSpeciesName(gApprenticeQuestionData->speciesId);
         break;
     case APPRENTICE_ASK_2SPECIES:
         left = 18;

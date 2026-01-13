@@ -4929,7 +4929,7 @@ bool32 NoAliveMonsForPlayer(void)
         }
 
         // If the total number of ineligible mons is 6 or more, lose the battle.
-        if (ineligibleMonsCount >= 6)
+        if (ineligibleMonsCount >= 8)
             return TRUE;
     }
 
@@ -10686,7 +10686,7 @@ static void Cmd_forcerandomswitch(void)
         if (BATTLE_TWO_VS_ONE_OPPONENT && !IsOnPlayerSide(gBattlerTarget))
         {
             firstMonId = 0;
-            lastMonId = 6;
+            lastMonId = PARTY_SIZE;
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }

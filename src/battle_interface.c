@@ -1114,7 +1114,7 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 
     memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(sEmptyWhiteText_GrayHighlight));
     barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].hMain_Battler) * 384)];
-    var = 5;
+    var = PARTY_SIZE-1;
     nature = GetNature(mon);
     StringCopy(&text[6], gNaturesInfo[nature].name);
     RenderTextHandleBold(barFontGfx, FONT_BOLD, text);
@@ -1245,7 +1245,7 @@ void SwapHpBarsWithHpText(void)
 #define tBattler                data[0]
 #define tSummaryBarSpriteId     data[1]
 #define tBallIconSpriteId(n)    data[3 + n]
-#define tIsBattleStart          data[10]
+#define tIsBattleStart          data[11]
 #define tBlend                  data[15]
 
 u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart)
@@ -1324,14 +1324,14 @@ u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, bo
 
         if (!isOpponent)
         {
-            gSprites[ballIconSpritesIds[i]].x += 10 * i + 24;
+            gSprites[ballIconSpritesIds[i]].x += 8 * i + 24;
             gSprites[ballIconSpritesIds[i]].data[1] = i * 7 + 10;
             gSprites[ballIconSpritesIds[i]].x2 = 120;
         }
         else
         {
-            gSprites[ballIconSpritesIds[i]].x -= 10 * (5 - i) + 24;
-            gSprites[ballIconSpritesIds[i]].data[1] = (6 - i) * 7 + 10;
+            gSprites[ballIconSpritesIds[i]].x -= 8 * (7 - i) + 24;
+            gSprites[ballIconSpritesIds[i]].data[1] = (8 - i) * 7 + 10;
             gSprites[ballIconSpritesIds[i]].x2 = -120;
         }
 

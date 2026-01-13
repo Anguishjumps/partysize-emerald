@@ -266,11 +266,11 @@ static void InitBtlControllersInternal(void)
 
             gBattlerPartyIndexes[0] = 0;
             gBattlerPartyIndexes[1] = 0;
-            gBattlerPartyIndexes[2] = 3;
+            gBattlerPartyIndexes[2] = MULTI_PARTY_SIZE;
             if (!isLink && isInGamePartner && (BATTLE_TWO_VS_ONE_OPPONENT || WILD_DOUBLE_BATTLE))
                 gBattlerPartyIndexes[3] = 1;
             else
-                gBattlerPartyIndexes[3] = 3;
+                gBattlerPartyIndexes[3] = MULTI_PARTY_SIZE;
         }
     }
     else
@@ -470,7 +470,7 @@ static void SetBattlePartyIds(void)
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            gBattlerPartyIndexes[1] = 0, gBattlerPartyIndexes[3] = 3;
+            gBattlerPartyIndexes[1] = 0, gBattlerPartyIndexes[3] = MULTI_PARTY_SIZE;
     }
 }
 
@@ -1068,9 +1068,9 @@ void BtlController_EmitChoosePokemon(u32 battler, u32 bufferId, u8 caseId, u8 sl
     gBattleResources->transferBuffer[3] = abilityId & 0xFF;
     gBattleResources->transferBuffer[7] = (abilityId >> 8) & 0xFF;
     gBattleResources->transferBuffer[8] = battlerPreventingSwitchout;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < PARTY_SIZE/2; i++)
         gBattleResources->transferBuffer[4 + i] = data[i];
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 9);  // Only 7 bytes were written.
+    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 10);  // Only 7 bytes were written.
 }
 
 static void UNUSED BtlController_EmitCmd23(u32 battler, u32 bufferId)
@@ -1209,7 +1209,7 @@ void BtlController_EmitChosenMonReturnValue(u32 battler, u32 bufferId, u8 partyI
         for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
             gBattleResources->transferBuffer[2 + i] = battlePartyOrder[i];
     }
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 5);
+    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 6);
 }
 
 void BtlController_EmitOneReturnValue(u32 battler, u32 bufferId, u16 ret)
