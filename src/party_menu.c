@@ -1752,13 +1752,14 @@ static void UpdateCurrentPartySelection(s8 *slotPtr, s8 movementDir)
     }
 }
 
+//Charlotte Here
 static void UpdatePartySelectionSingleLayout(s8 *slotPtr, s8 movementDir)
 {
     // PARTY_SIZE + 1 is Cancel, PARTY_SIZE is Confirm
     switch (movementDir)
     {
     case MENU_DIR_UP:
-        if (*slotPtr == 0)
+        if (*slotPtr == 0 || *slotPtr == 1) //Top 2 Slots -> Loop to Cancel Button
         {
             *slotPtr = PARTY_SIZE + 1;
         }
@@ -1773,45 +1774,41 @@ static void UpdatePartySelectionSingleLayout(s8 *slotPtr, s8 movementDir)
             else
                 *slotPtr = gPlayerPartyCount - 1;
         }
-        else
+        else //Move Up
         {
-            (*slotPtr)--;
+            (*slotPtr)-=2;
         }
         break;
     case MENU_DIR_DOWN:
-        if (*slotPtr == PARTY_SIZE + 1)
+        if (*slotPtr == PARTY_SIZE + 1) //Hovering over cancel button -> Loop to top
         {
             *slotPtr = 0;
         }
         else
         {
-            if (*slotPtr == gPlayerPartyCount - 1)
+            if (*slotPtr == gPlayerPartyCount - 1 || (*slotPtr + 2 >= PARTY_SIZE)) //Last Party Slot -> move to confirm/cancel
             {
                 if (sPartyMenuInternal->chooseHalf)
                     *slotPtr = PARTY_SIZE;
                 else
                     *slotPtr = PARTY_SIZE + 1;
             }
-            else
+            else //Move Down
             {
-                (*slotPtr)++;
+                (*slotPtr)+=2;
             }
         }
         break;
     case MENU_DIR_RIGHT:
-        if (gPlayerPartyCount != 1 && *slotPtr == 0)
+        if ((*slotPtr % 2 == 0) && *slotPtr+1 < gPlayerPartyCount && *slotPtr != PARTY_SIZE && *slotPtr != PARTY_SIZE + 1)
         {
-            if (sPartyMenuInternal->lastSelectedSlot == 0)
-                *slotPtr = 1;
-            else
-                *slotPtr = sPartyMenuInternal->lastSelectedSlot;
+            *slotPtr += 1;
         }
         break;
     case MENU_DIR_LEFT:
-        if (*slotPtr != 0 && *slotPtr != PARTY_SIZE && *slotPtr != PARTY_SIZE + 1)
+        if ((*slotPtr % 2 != 0) && *slotPtr != PARTY_SIZE && *slotPtr != PARTY_SIZE + 1)
         {
-            sPartyMenuInternal->lastSelectedSlot = *slotPtr;
-            *slotPtr = 0;
+            *slotPtr -= 1;
         }
         break;
     }

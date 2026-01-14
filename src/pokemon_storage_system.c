@@ -4174,18 +4174,20 @@ static void UpdateCloseBoxButtonFlash(void)
     }
 }
 
+
 static void SetPartySlotTilemaps(void)
 {
     u8 i;
 
-    // Skips first party slot, it should always be drawn
-    // as if it has a Pokémon in it
-    for (i = 1; i < PARTY_SIZE; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         s32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         SetPartySlotTilemap(i, species != SPECIES_NONE);
     }
 }
+
+//Charlotte Here
+static const u16 sPartySlotTile[PARTY_SIZE] = {49,55,85,91,121,127,157,163};
 
 static void SetPartySlotTilemap(u8 partyId, bool8 hasMon)
 {
@@ -4197,9 +4199,8 @@ static void SetPartySlotTilemap(u8 partyId, bool8 hasMon)
     else
         data = sPartySlotEmpty_Tilemap;
 
-    index = 3 * (3 * (partyId - 1) + 1);
-    index *= 4;
-    index += 7;
+    index = (sPartySlotTile[partyId]);
+
     for (i = 0; i < 3; i++)
     {
         for (j = 0; j < 4; j++)
@@ -4731,21 +4732,25 @@ static void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
         sStorage->boxMonsSprites[boxPosition]->oam.objMode = objMode;
 }
 
+//Charlotte Here
 static void CreatePartyMonsSprites(bool8 visible)
 {
     u16 i, count;
-    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
-    u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
-
-    sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
-    count = 1;
-    for (i = 1; i < PARTY_SIZE; i++)
+    u16 species;
+    u32 personality;
+    count = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
         if (species != SPECIES_NONE)
         {
-            personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+            if (i%2 == 0) {
+                sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 104,  8 * (3 * Div(i,2)) + 38, 1, 12);
+            }
+            else {
+                sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * Div(i,2)) + 38, 1, 12);
+            }
             count++;
         }
         else
@@ -4805,15 +4810,16 @@ static u8 GetNumPartySpritesCompacting(void)
 #define sSpeedY    data[5]
 #define sMoveSteps data[6]
 
+//Charlotte Here
 static void MovePartySpriteToNextSlot(struct Sprite *sprite, u16 partyId)
 {
     s16 x, y;
 
     sprite->sPartyId = partyId;
-    if (partyId == 0)
-        x = 104, y = 64;
+    if (partyId % 2 == 0)
+        x = 104, y = 8 * (3 * Div(partyId,2)) + 38;
     else
-        x = 152, y = 8 * (3 * (partyId - 1)) + 16;
+        x = 152, y = 8 * (3 * Div(partyId,2)) + 38;
 
     sprite->sMonX = (u16)(sprite->x) * 8;
     sprite->sMonY = (u16)(sprite->y) * 8;
@@ -4835,15 +4841,15 @@ static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *sprite)
     }
     else
     {
-        if (sprite->sPartyId == 0)
+        if (sprite->sPartyId % 2 == 0)
         {
             sprite->x = 104;
-            sprite->y = 64;
+            sprite->y = 8 * (3 * Div(sprite->sPartyId,2)) + 38;
         }
         else
         {
             sprite->x = 152;
-            sprite->y = 8 * (3 * (sprite->sPartyId - 1)) + 16;
+            sprite->y = 8 * (3 * Div(sprite->sPartyId,2)) + 38;
         }
         sprite->callback = SpriteCallbackDummy;
         sStorage->partySprites[sprite->sPartyId] = sprite;
@@ -5830,6 +5836,7 @@ static void InitCursorOnReopen(void)
     }
 }
 
+//Charlotte Here
 static void GetCursorCoordsByPos(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *y)
 {
     switch (cursorArea)
@@ -5839,20 +5846,20 @@ static void GetCursorCoordsByPos(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *
         *y = (cursorPosition / IN_BOX_COLUMNS) * 24 +  32;
         break;
     case CURSOR_AREA_IN_PARTY:
-        if (cursorPosition == 0)
-        {
-            *x = 104;
-            *y = 52;
-        }
-        else if (cursorPosition == PARTY_SIZE)
+        if (cursorPosition == PARTY_SIZE)
         {
             *x = 152;
             *y = 132;
         }
+        else if (cursorPosition % 2 == 0)
+        {
+            *x = 104;
+            *y = Div(cursorPosition,2) * 24 + 26;
+        }
         else
         {
             *x = 152;
-            *y = (cursorPosition - 1) * 24 + 4;
+            *y = Div(cursorPosition,2) * 24 + 26;
         }
         break;
     case CURSOR_AREA_BOX_TITLE:
@@ -7371,6 +7378,7 @@ static u8 InBoxInput_MovingMultiple(void)
     }
 }
 
+//Charlotte Here
 static u8 HandleInput_InParty(void)
 {
     u8 retVal;
@@ -7390,35 +7398,42 @@ static u8 HandleInput_InParty(void)
 
         if (JOY_REPEAT(DPAD_UP))
         {
-            if (--cursorPosition < 0)
+            if (cursorPosition == PARTY_SIZE)
+                cursorPosition -= 1;
+            else if ((cursorPosition -2) < 0)
                 cursorPosition = PARTY_SIZE;
-            if (cursorPosition != sCursorPosition)
-                retVal = INPUT_MOVE_CURSOR;
+            else
+                cursorPosition -= 2;
+
+            retVal = INPUT_MOVE_CURSOR;
             break;
         }
         else if (JOY_REPEAT(DPAD_DOWN))
         {
-            if (++cursorPosition > PARTY_SIZE)
-                cursorPosition = 0;
-            if (cursorPosition != sCursorPosition)
-                retVal = INPUT_MOVE_CURSOR;
+            if (cursorPosition == PARTY_SIZE)
+                cursorPosition = 1;
+            else if ((cursorPosition + 2) >= PARTY_SIZE)
+                cursorPosition = PARTY_SIZE;
+            else
+                cursorPosition += 2;
+
+            retVal = INPUT_MOVE_CURSOR;
             break;
         }
-        else if (JOY_REPEAT(DPAD_LEFT) && sCursorPosition != 0)
+        else if (JOY_REPEAT(DPAD_LEFT) && (sCursorPosition % 2 != 0)) //Right Column
         {
             retVal = INPUT_MOVE_CURSOR;
-            sStorage->cursorPrevHorizPos = sCursorPosition;
-            cursorPosition = 0;
+            cursorPosition -= 1;
             break;
         }
         else if (JOY_REPEAT(DPAD_RIGHT))
         {
-            if (sCursorPosition == 0)
+            if (sCursorPosition % 2 == 0) //Left Column
             {
                 retVal = INPUT_MOVE_CURSOR;
-                cursorPosition = sStorage->cursorPrevHorizPos;
+                cursorPosition += 1;
             }
-            else
+            else //If on Right Column, exit party menu
             {
                 retVal = INPUT_HIDE_PARTY;
                 cursorArea = CURSOR_AREA_IN_BOX;
