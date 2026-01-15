@@ -1,2 +1,61 @@
 buzzwole_encounter_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, buzzwole_encounter_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, buzzwole_encounter_OnResume
 	.byte 0
+
+buzzwole_encounter_OnTransition:
+	call_if_set FLAG_CAUGHT_BUZZWOLE, buzzwole_enounter_EventScript_HideBuzzwole
+	call_if_unset FLAG_CAUGHT_BUZZWOLE, buzzwole_encounter_EventScript_TryShowBuzzwole
+	end
+
+buzzwole_encounter_EventScript_HideLugia::
+	setflag FLAG_HIDE_BUZZWOLE
+	return
+
+buzzwole_encounter_EventScript_TryShowBuzzwole::
+	goto_if_set FLAG_DEFEATED_BUZZWOLE, Common_EventScript_NopReturn
+	clearflag FLAG_HIDE_BUZZWOLE
+	return
+
+buzzwole_encounter_OnResume:
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, buzzwole_encounter_EventScript_TryRemoveBuzzwole
+	end
+
+buzzwole_encounter_EventScript_TryRemoveBuzzwole::
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject LOCALID_PETALBURG_WOODS_BUZZWOLE
+	return
+
+buzzwole_encounter_EventScript_Buzzwole::
+	lock
+	faceplayer
+	waitse
+	delay 50
+	waitse
+	playmoncry SPECIES_BUZZWOLE, CRY_MODE_ENCOUNTER
+	waitmoncry
+	delay 20
+	seteventmon SPECIES_BUZZWOLE, 20
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	waitstate
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, buzzwole_encounter_EventScript_DefeatedBuzzwole
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, buzzwole_encounter_EventScript_RanFromBuzzwole
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, buzzwole_encounter_EventScript_RanFromBuzzwole
+	setflag FLAG_CAUGHT_BUZZWOLE
+	release
+	end
+
+NavelRock_Bottom_EventScript_DefeatedBuzzwole::
+	setflag FLAG_DEFEATED_BUZZWOLE
+	setvar VAR_0x8004, SPECIES_BUZZWOLE
+	goto Common_EventScript_LegendaryFlewAway
+	end
+
+NavelRock_Bottom_EventScript_RanFromBuzzwole::
+	setvar VAR_0x8004, SPECIES_BUZZWOLE
+	goto Common_EventScript_LegendaryFlewAway
+	end

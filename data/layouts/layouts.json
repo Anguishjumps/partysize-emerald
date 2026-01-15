@@ -4414,8 +4414,8 @@
     {
       "id": "LAYOUT_BUZZWOLE_ENCOUNTER",
       "name": "buzzwole_encounter_Layout",
-      "width": 16,
-      "height": 16,
+      "width": 20,
+      "height": 24,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/buzzwole_encounter/border.bin",
