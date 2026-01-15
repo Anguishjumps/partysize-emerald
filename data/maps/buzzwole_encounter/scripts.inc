@@ -4,11 +4,11 @@ buzzwole_encounter_MapScripts::
 	.byte 0
 
 buzzwole_encounter_OnTransition:
-	call_if_set FLAG_CAUGHT_BUZZWOLE, buzzwole_enounter_EventScript_HideBuzzwole
+	call_if_set FLAG_CAUGHT_BUZZWOLE, buzzwole_encounter_EventScript_HideBuzzwole
 	call_if_unset FLAG_CAUGHT_BUZZWOLE, buzzwole_encounter_EventScript_TryShowBuzzwole
 	end
 
-buzzwole_encounter_EventScript_HideLugia::
+buzzwole_encounter_EventScript_HideBuzzwole::
 	setflag FLAG_HIDE_BUZZWOLE
 	return
 
@@ -49,13 +49,13 @@ buzzwole_encounter_EventScript_Buzzwole::
 	release
 	end
 
-NavelRock_Bottom_EventScript_DefeatedBuzzwole::
+buzzwole_encounter_EventScript_DefeatedBuzzwole::
 	setflag FLAG_DEFEATED_BUZZWOLE
 	setvar VAR_0x8004, SPECIES_BUZZWOLE
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-NavelRock_Bottom_EventScript_RanFromBuzzwole::
+buzzwole_encounter_EventScript_RanFromBuzzwole::
 	setvar VAR_0x8004, SPECIES_BUZZWOLE
 	goto Common_EventScript_LegendaryFlewAway
 	end
