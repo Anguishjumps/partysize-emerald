@@ -655,10 +655,10 @@
 #define FLAG_HIDDEN_ITEM_NAVEL_ROCK_TOP_SACRED_ASH           (FLAG_HIDDEN_ITEMS_START + 0x6D)
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
+#define FLAG_HIDDEN_ITEM_ROUTE_102_MASTER_BALL_1             (FLAG_HIDDEN_ITEMS_START + 0x70) // new master ball flag
+#define FLAG_HIDDEN_ITEM_ROUTE_102_MASTER_BALL_2             (FLAG_HIDDEN_ITEMS_START + 0x71) // new master ball flag
+#define FLAG_HIDDEN_ITEM_ROUTE_102_MASTER_BALL_3             (FLAG_HIDDEN_ITEMS_START + 0x72) // new master ball flag
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
 #define FLAG_UNUSED_0x267  0x267 // Unused Flag
 #define FLAG_UNUSED_0x268  0x268 // Unused Flag
 #define FLAG_UNUSED_0x269  0x269 // Unused Flag
