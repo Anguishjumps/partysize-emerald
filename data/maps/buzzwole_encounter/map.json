@@ -46,5 +46,22 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 12,
+      "y": 4,
+      "elevation": 0,
+      "item": "ITEM_MASTER_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_BUZZWOLE_MASTER_BALL_1"
+    },
+    {
+      "type": "hidden_item",
+      "x": 17,
+      "y": 6,
+      "elevation": 0,
+      "item": "ITEM_MASTER_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_BUZZWOLE_MASTER_BALL_2"
+    }
+  ]
 }
