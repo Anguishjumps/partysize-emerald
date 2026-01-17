@@ -516,9 +516,9 @@
 #define FLAG_DEFEATED_HO_OH                  0x1DC
 #define FLAG_DEFEATED_LUGIA                  0x1DD
 
-#define FLAG_UNUSED_0x1DE                    0x1DE // Unused Flag
-#define FLAG_UNUSED_0x1DF                    0x1DF // Unused Flag
-#define FLAG_UNUSED_0x1E0                    0x1E0 // Unused Flag
+#define FLAG_CAUGHT_BUZZWOLE                    0x1DE // Unused Flag
+#define FLAG_DEFEATED_BUZZWOLE                    0x1DF // Unused Flag
+#define FLAG_HIDE_BUZZWOLE                    0x1E0 // Unused Flag
 #define FLAG_UNUSED_0x1E1                    0x1E1 // Unused Flag
 #define FLAG_UNUSED_0x1E2                    0x1E2 // Unused Flag
 #define FLAG_UNUSED_0x1E3                    0x1E3 // Unused Flag
@@ -658,9 +658,9 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_102_MASTER_BALL_1             (FLAG_HIDDEN_ITEMS_START + 0x70) // new master ball flag
 #define FLAG_HIDDEN_ITEM_ROUTE_102_MASTER_BALL_2             (FLAG_HIDDEN_ITEMS_START + 0x71) // new master ball flag
 #define FLAG_HIDDEN_ITEM_ROUTE_102_MASTER_BALL_3             (FLAG_HIDDEN_ITEMS_START + 0x72) // new master ball flag
+#define FLAG_HIDDEN_ITEM_BUZZWOLE_MASTER_BALL_1              (FLAG_HIDDEN_ITEMS_START + 0x73) // new master ball flag
+#define FLAG_HIDDEN_ITEM_BUZZWOLE_MASTER_BALL_2              (FLAG_HIDDEN_ITEMS_START + 0x74) // new master ball flag
 
-#define FLAG_UNUSED_0x267  0x267 // Unused Flag
-#define FLAG_UNUSED_0x268  0x268 // Unused Flag
 #define FLAG_UNUSED_0x269  0x269 // Unused Flag
 #define FLAG_UNUSED_0x26A  0x26A // Unused Flag
 #define FLAG_UNUSED_0x26B  0x26B // Unused Flag

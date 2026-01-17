@@ -1345,6 +1345,18 @@ static const struct SpriteFrameImage sPicTable_HoOhOld[] = {
     overworld_frame(gObjectEventPic_HoOhOld, 4, 4, 1),
 };
 
+static const struct SpriteFrameImage sPicTable_BuzzwoleOld[] = {
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 1),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 1),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
+    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 1),
+};
+
 static const struct SpriteFrameImage sPicTable_RubySapphireBrendan[] = {
     overworld_ascending_frames(gObjectEventPic_RubySapphireBrendanNormal, 2, 4),
 };
