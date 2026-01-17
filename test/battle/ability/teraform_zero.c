@@ -6,8 +6,8 @@ DOUBLE_BATTLE_TEST("Teraform Zero clears weather and terrain upon activation")
     GIVEN {
         PLAYER(SPECIES_TERAPAGOS_TERASTAL);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_KYOGRE) { Ability(ABILITY_DRIZZLE); }
-        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); }
+        OPPONENT(SPECIES_KYOGRE) {Ability(ABILITY_DRIZZLE); }
+        OPPONENT(SPECIES_TAPU_KOKO) {Ability(ABILITY_ELECTRIC_SURGE); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
@@ -22,9 +22,9 @@ DOUBLE_BATTLE_TEST("Teraform Zero can be supressed")
     GIVEN {
         PLAYER(SPECIES_TERAPAGOS_TERASTAL);
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
-        OPPONENT(SPECIES_KYOGRE) { Ability(ABILITY_DRIZZLE); }
-        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); }
+        PLAYER(SPECIES_WEEZING) {Ability(ABILITY_NEUTRALIZING_GAS); }
+        OPPONENT(SPECIES_KYOGRE) {Ability(ABILITY_DRIZZLE); }
+        OPPONENT(SPECIES_TAPU_KOKO) {Ability(ABILITY_ELECTRIC_SURGE); }
     } WHEN {
         TURN { SWITCH(playerRight, 2); MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
@@ -87,10 +87,10 @@ DOUBLE_BATTLE_TEST("Teraform Zero shouldn't cause Neutralizing Gas to show it's 
 {
     GIVEN {
         PLAYER(SPECIES_TERAPAGOS_TERASTAL);
-        PLAYER(SPECIES_ABSOL) { Ability(ABILITY_PRESSURE); }
-        PLAYER(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
-        OPPONENT(SPECIES_KYOGRE) { Ability(ABILITY_DRIZZLE); }
-        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); }
+        PLAYER(SPECIES_ABSOL) {Ability(ABILITY_PRESSURE); }
+        PLAYER(SPECIES_WEEZING) {Ability(ABILITY_NEUTRALIZING_GAS); }
+        OPPONENT(SPECIES_KYOGRE) {Ability(ABILITY_DRIZZLE); }
+        OPPONENT(SPECIES_TAPU_KOKO) {Ability(ABILITY_ELECTRIC_SURGE); }
     } WHEN {
         TURN {  SWITCH(playerRight, 2); MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
     } SCENE {
@@ -98,5 +98,21 @@ DOUBLE_BATTLE_TEST("Teraform Zero shouldn't cause Neutralizing Gas to show it's 
         MESSAGE("Terapagos terastallized into the Stellar type!");
         NOT ABILITY_POPUP(playerRight, ABILITY_NEUTRALIZING_GAS);
         MESSAGE("Terapagos used Celebrate!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Teraform Zero clears weather and terrain upon activation (Multi)")
+{
+    GIVEN {
+        PLAYER(SPECIES_TERAPAGOS_TERASTAL) {Ability(ABILITY_LIGHT_METAL); Innates(ABILITY_TERAFORM_ZERO); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_KYOGRE) {Ability(ABILITY_DRIZZLE); }
+        OPPONENT(SPECIES_TAPU_KOKO) {Ability(ABILITY_ELECTRIC_SURGE); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_TERAFORM_ZERO);
+        MESSAGE("The rain stopped.");
+        MESSAGE("The electricity disappeared from the battlefield.");
     }
 }

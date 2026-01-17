@@ -126,6 +126,9 @@ enum MonData {
     MON_DATA_GIGANTAMAX_FACTOR,
     MON_DATA_TERA_TYPE,
     MON_DATA_EVOLUTION_TRACKER,
+    MON_DATA_INNATE1,
+    MON_DATA_INNATE2,
+    MON_DATA_INNATE3,
 };
 
 struct PokemonSubstruct0
@@ -353,7 +356,6 @@ struct Volatiles
     // u32 foresight:1;
     // u32 dragonCheer:1;
     // u32 focusEnergy:1;
-    // u32 bonusCritStages:3;
 };
 
 struct BattlePokemon
@@ -391,6 +393,7 @@ struct BattlePokemon
     /*0x5D*/ u32 otId;
     /*0x61*/ u8 metLevel;
     /*0x62*/ bool8 isShiny;
+    /*0x64*/ enum Ability innates[MAX_MON_INNATES_INTERNAL];
 };
 
 struct EvolutionParam
@@ -437,6 +440,7 @@ struct SpeciesInfo /*0xC4*/
     u8 eggGroups[2];
     enum Ability abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
     u8 safariZoneFleeRate;
+    enum Ability innates[MAX_MON_INNATES_INTERNAL];
 
     // Pokédex data
     u8 categoryName[13];
@@ -723,6 +727,7 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
+bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battler);
 u16 GetUnionRoomTrainerPic(void);
 enum TrainerClassID GetUnionRoomTrainerClass(void);
 void CreateEnemyEventMon(void);
@@ -840,14 +845,14 @@ void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u8 CanLearnTeachableMove(u16 species, u16 move);
-u32 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves);
-u32 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves);
-u32 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves);
-u32 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves);
-bool32 HasRelearnerLevelUpMoves(struct Pokemon *mon);
-bool32 HasRelearnerEggMoves(struct Pokemon *mon);
-bool32 HasRelearnerTMMoves(struct Pokemon *mon);
-bool32 HasRelearnerTutorMoves(struct Pokemon *mon);
+u8 GetRelearnerLevelUpMoves(struct Pokemon *mon, u16 *moves);
+u8 GetRelearnerEggMoves(struct Pokemon *mon, u16 *moves);
+u8 GetRelearnerTMMoves(struct Pokemon *mon, u16 *moves);
+u8 GetRelearnerTutorMoves(struct Pokemon *mon, u16 *moves);
+u8 GetNumberOfLevelUpMoves(struct Pokemon *mon);
+u8 GetNumberOfEggMoves(struct Pokemon *mon);
+u8 GetNumberOfTMMoves(struct Pokemon *mon);
+u8 GetNumberOfTutorMoves(struct Pokemon *mon);
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
 u16 SpeciesToPokedexNum(u16 species);
 bool32 IsSpeciesInHoennDex(u16 species);
@@ -919,4 +924,8 @@ u8 *GetSavedPlayerPartyCount(void);
 void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 bool32 IsSpeciesOfType(u32 species, enum Type type);
 
+u8 SpeciesHasInnate(u16 species, u16 ability);
+enum Ability GetSpeciesInnate(u16 species, u8 traitNum);
+bool8 BoxMonHasInnate(struct BoxPokemon* boxmon, u16 ability);
+bool8 MonHasTrait(struct Pokemon* mon, u16 ability);
 #endif // GUARD_POKEMON_H

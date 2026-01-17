@@ -18,37 +18,18 @@ SINGLE_BATTLE_TEST("Sturdy prevents OHKO moves")
     }
 }
 
-SINGLE_BATTLE_TEST("Sturdy prevents OHKOs (Gen5+)")
+SINGLE_BATTLE_TEST("Sturdy prevents OHKOs")
 {
-    u32 config;
-    PARAMETRIZE { config = GEN_4; }
-    PARAMETRIZE { config = GEN_5; }
     GIVEN {
-        WITH_CONFIG(CONFIG_STURDY, config);
         PLAYER(SPECIES_GEODUDE) { Ability(ABILITY_STURDY); MaxHP(100); HP(100); }
-        PLAYER(SPECIES_GEODUDE);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {
-            MOVE(opponent, MOVE_SEISMIC_TOSS);
-            if (config < GEN_5) {
-                SEND_OUT(player, 1);
-            }
-        }
+        TURN { MOVE(opponent, MOVE_SEISMIC_TOSS); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SEISMIC_TOSS, opponent);
-        if (config >= GEN_5) {
-            HP_BAR(player, hp: 1);
-            ABILITY_POPUP(player, ABILITY_STURDY);
-            MESSAGE("Geodude endured the hit using Sturdy!");
-        } else {
-            HP_BAR(player, hp: 0);
-            NONE_OF {
-                ABILITY_POPUP(player, ABILITY_STURDY);
-                MESSAGE("Geodude endured the hit using Sturdy!");
-            }
-            SEND_IN_MESSAGE("Geodude");
-        }
+        HP_BAR(player, hp: 1);
+        ABILITY_POPUP(player, ABILITY_STURDY);
+        MESSAGE("Geodude endured the hit using Sturdy!");
     }
 }
 
@@ -56,6 +37,51 @@ SINGLE_BATTLE_TEST("Sturdy does not prevent non-OHKOs")
 {
     GIVEN {
         PLAYER(SPECIES_GEODUDE) { Ability(ABILITY_STURDY); MaxHP(100); HP(99); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SEISMIC_TOSS); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SEISMIC_TOSS, opponent);
+        HP_BAR(player, hp: 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sturdy prevents OHKO moves (Multi)")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_FISSURE) == EFFECT_OHKO);
+        PLAYER(SPECIES_GEODUDE) { Ability(ABILITY_ROCK_HEAD); Innates(ABILITY_STURDY); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FISSURE); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet used Fissure!");
+        ABILITY_POPUP(player, ABILITY_STURDY);
+        MESSAGE("Geodude was protected by Sturdy!");
+    } THEN {
+        EXPECT_EQ(player->hp, player->maxHP);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sturdy prevents OHKOs (Multi)")
+{
+    GIVEN {
+        PLAYER(SPECIES_GEODUDE) { Ability(ABILITY_ROCK_HEAD); Innates(ABILITY_STURDY); MaxHP(100); HP(100); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SEISMIC_TOSS); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SEISMIC_TOSS, opponent);
+        HP_BAR(player, hp: 1);
+        ABILITY_POPUP(player, ABILITY_STURDY);
+        MESSAGE("Geodude endured the hit using Sturdy!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Sturdy does not prevent non-OHKOs (Multi)")
+{
+    GIVEN {
+        PLAYER(SPECIES_GEODUDE) { Ability(ABILITY_ROCK_HEAD); Innates(ABILITY_STURDY); MaxHP(100); HP(99); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_SEISMIC_TOSS); }

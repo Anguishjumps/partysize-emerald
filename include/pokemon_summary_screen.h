@@ -37,6 +37,7 @@ enum PokemonSummaryScreenMode
 enum PokemonSummaryScreenPage
 {
     PSS_PAGE_INFO,
+    PSS_PAGE_TRAITS,
     PSS_PAGE_SKILLS,
     PSS_PAGE_BATTLE_MOVES,
     PSS_PAGE_CONTEST_MOVES,
@@ -57,5 +58,7 @@ u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetAnimDelayTaskId(u8 taskId);
 void ShowRelearnPrompt(void);
 void TryUpdateRelearnType(enum IncrDecrUpdateValues delta);
+u32 GetCurrentRelearnMovesCount(void);
+u32 GetRelearnMovesCount(enum MoveRelearnerStates state);
 
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

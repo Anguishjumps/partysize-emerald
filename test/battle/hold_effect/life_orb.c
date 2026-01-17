@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(gItemsInfo[ITEM_LIFE_ORB].holdEffect == HOLD_EFFECT_LIFE_ORB);
-}
-
 SINGLE_BATTLE_TEST("Life Orb activates when users attack is succesful")
 {
     GIVEN {
@@ -110,7 +105,6 @@ SINGLE_BATTLE_TEST("Life Orb does not activate if on a confusion hit")
 SINGLE_BATTLE_TEST("Life Orb does not activate if move was absorbed by target")
 {
     GIVEN {
-        WITH_CONFIG(CONFIG_REDIRECT_ABILITY_IMMUNITY, GEN_5);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LIFE_ORB); }
         OPPONENT(SPECIES_RAICHU) { Ability(ABILITY_LIGHTNING_ROD); }
     } WHEN {
@@ -155,5 +149,22 @@ SINGLE_BATTLE_TEST("Life Orb does not activate on a charge turn")
         }
         HP_BAR(opponent);
         HP_BAR(player); // Lief Orb
+    }
+}
+
+SINGLE_BATTLE_TEST("Life Orb does not activate if move was absorbed by target (Multi)")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LIFE_ORB); }
+        OPPONENT(SPECIES_RAICHU) { Ability(ABILITY_STATIC); Innates(ABILITY_LIGHTNING_ROD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHOCK_WAVE); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SHOCK_WAVE, player);
+            HP_BAR(opponent);
+            HP_BAR(player);
+            MESSAGE("Wobbuffet was hurt by the Life Orb!");
+        }
     }
 }

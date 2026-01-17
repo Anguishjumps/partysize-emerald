@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon (Gen3-6)")
 {
     GIVEN {
-        WITH_CONFIG(CONFIG_SHEER_COLD_IMMUNITY, GEN_6);
+        WITH_CONFIG(GEN_CONFIG_SHEER_COLD_IMMUNITY, GEN_6);
         ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_GLALIE);
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon (Gen3-6)")
 SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon (Gen7+)")
 {
     GIVEN {
-        WITH_CONFIG(CONFIG_SHEER_COLD_IMMUNITY, GEN_7);
+        WITH_CONFIG(GEN_CONFIG_SHEER_COLD_IMMUNITY, GEN_7);
         ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_GLALIE);
@@ -84,3 +84,31 @@ TO_DO_BATTLE_TEST("Sheer Cold always fails if the target has a higher level than
 TO_DO_BATTLE_TEST("Sheer Cold's accuracy increases by 1% for every level the user has over the target")
 TO_DO_BATTLE_TEST("Sheer Cold's accuracy decreasaes by 10% if the user is not Ice type")
 TO_DO_BATTLE_TEST("Sheer Cold's ignores non-stage accuracy modifiers") // Gravity, Wide Lens, Compound Eyes
+
+SINGLE_BATTLE_TEST("Sheer Cold can hit semi-invulnerable mons when the user has No-Guard (Multi)")
+{
+    GIVEN {
+        ASSUME(GetItemHoldEffect(ITEM_FOCUS_SASH) == HOLD_EFFECT_FOCUS_SASH);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); Innates(ABILITY_NO_GUARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLY); }
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        HP_BAR(opponent, hp: 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("Sheer Cold can be endured by Sturdy (Multi)")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GEODUDE) { Ability(ABILITY_ROCK_HEAD); Innates(ABILITY_STURDY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHEER_COLD); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SHEER_COLD, player);
+        ABILITY_POPUP(opponent, ABILITY_STURDY);
+    }
+}

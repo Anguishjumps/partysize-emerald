@@ -47,18 +47,6 @@ AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- Extreme Evoboost")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI uses Z-Moves to bypass move limitations")
-{
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT );
-        ASSUME(GetMoveType(MOVE_QUICK_ATTACK) == TYPE_NORMAL);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Moves(MOVE_POUND, MOVE_LAST_RESORT); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponent, MOVE_LAST_RESORT, gimmick: GIMMICK_Z_MOVE); }
-    }
-}
-
 AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- 10,000,000 Volt Thunderbolt")
 {
     GIVEN {
@@ -210,4 +198,21 @@ AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- Z-Transform")
 
 TO_DO_BATTLE_TEST("TODO: AI uses Z-Moves -- Z-Trick Room")
 
+AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- Z-Conversion (Multi)")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_NONE; }
+    PARAMETRIZE { ability = ABILITY_OPPORTUNIST; }
 
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT );
+        ASSUME(GetMoveType(MOVE_CONVERSION) == TYPE_NORMAL);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); Innates(ability); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Ability(ABILITY_SHADOW_TAG); Innates(ABILITY_ADAPTABILITY); Moves(MOVE_THUNDERBOLT, MOVE_CONVERSION); }
+    } WHEN {
+    if (ability == ABILITY_OPPORTUNIST)
+        TURN { EXPECT_MOVE(opponent, MOVE_CONVERSION, gimmick: GIMMICK_NONE); }
+    else
+        TURN { EXPECT_MOVE(opponent, MOVE_CONVERSION, gimmick: GIMMICK_Z_MOVE); }
+    }
+}

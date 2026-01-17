@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Hail deals 1/16 damage per turn")
         PLAYER(SPECIES_GLALIE);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_HAIL); }
+        TURN {MOVE(player, MOVE_HAIL);}
     } SCENE {
         MESSAGE("The opposing Wobbuffet is buffeted by the hail!");
         HP_BAR(opponent, captureDamage: &hailDamage);
@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("Hail damage does not affect Ice-type Pokémon")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GLALIE);
     } WHEN {
-        TURN { MOVE(player, MOVE_HAIL); }
+        TURN {MOVE(player, MOVE_HAIL);}
     } SCENE {
         NOT MESSAGE("The opposing Glalie is buffeted by the hail!");
     }
@@ -98,6 +98,20 @@ SINGLE_BATTLE_TEST("Hail doesn't do damage when weather is negated")
         ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_ICE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GOLDUCK) { Ability(ABILITY_CLOUD_NINE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_HAIL); }
+    } SCENE {
+        NOT HP_BAR(player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Hail doesn't do damage when weather is negated (Multi)")
+{
+    GIVEN {
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_ICE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GOLDUCK) { Ability(ABILITY_SWIFT_SWIM); Innates(ABILITY_CLOUD_NINE); }
     } WHEN {
         TURN { MOVE(player, MOVE_HAIL); }
     } SCENE {

@@ -171,13 +171,14 @@ struct ProtectStruct
     u16 helpingHand:3;
     u16 assuranceDoubled:1;
     u16 myceliumMight:1;
-    u16 revengeDoubled:4;
-    u16 padding:7;
+    u16 padding:11;
     // End of 16-bit bitfield
     u16 physicalDmg;
     u16 specialDmg;
     u8 physicalBattlerId:4;
     u8 specialBattlerId:4;
+    u8 contraryDefiant; // 1 - Contrary + Defiant triggered (do not repeat). 0 - abilities not triggered together yet
+    u8 contraryCompetitive; // 1 - Contrary + Competitive triggered (do not repeat). 0 - abilities not triggered together yet
 };
 
 // Cleared at the start of HandleAction_ActionFinished
@@ -215,6 +216,8 @@ struct SpecialStatus
     u8 dancerOriginalTarget:3;
     u8 padding3:5;
     // End of byte
+    bool8 switchInTraitDone[MAX_MON_TRAITS];
+    bool8 endTurnTraitDone[MAX_MON_TRAITS];
 };
 
 struct SideTimer
@@ -315,6 +318,7 @@ struct SimulatedDamage
 struct AiLogicData
 {
     enum Ability abilities[MAX_BATTLERS_COUNT];
+    enum Ability innates[MAX_BATTLERS_COUNT][MAX_MON_INNATES];
     u16 items[MAX_BATTLERS_COUNT];
     u16 holdEffects[MAX_BATTLERS_COUNT];
     u8 holdEffectParams[MAX_BATTLERS_COUNT];
@@ -616,7 +620,7 @@ struct EventStates
     u32 arenaTurn:8;
     enum BattleSide battlerSide:4;
     enum BattlerId moveEndBattler:4;
-    enum FirstTurnEventsStates beforeFirstTurn:8;
+    enum FirstTurnEventsStates beforeFristTurn:8;
     enum FaintedActions faintedAction:8;
     enum BattlerId faintedActionBattler:4;
     enum MoveSuccessOrder atkCanceler:8;
@@ -746,6 +750,7 @@ struct BattleStruct
     u8 pledgeMove:1;
     u8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 spriteIgnore0Hp:1;
+    u8 bonusCritStages[MAX_BATTLERS_COUNT]; // G-Max Chi Strike boosts crit stages of allies.
     u8 itemPartyIndex[MAX_BATTLERS_COUNT];
     u8 itemMoveIndex[MAX_BATTLERS_COUNT];
     s32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
@@ -872,7 +877,8 @@ static inline bool32 IsBattleMoveStatus(u32 move)
 #define SET_STAT_BUFF_VALUE(n) ((((n) << 3) & 0xF8))
 
 #define SET_STATCHANGER(statId, stage, goesDown) (gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
-#define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
+#define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7)) // Moody
+#define SET_STATCHANGER3(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7)) // Speed Boost
 
 // NOTE: The members of this struct have hard-coded offsets
 //       in include/constants/battle_script_commands.h
@@ -1057,6 +1063,10 @@ extern u16 gCalledMove;
 extern s32 gBideDmg[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedItem;
 extern enum Ability gLastUsedAbility;
+extern enum Ability gDisplayAbility;
+extern enum Ability gDisplayAbility2;
+extern u8 gDisplayBattler;
+extern enum Ability gTraitStack[MAX_BATTLERS_COUNT * MAX_MON_TRAITS][2];
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
 extern u8 gBattlerFainted;
