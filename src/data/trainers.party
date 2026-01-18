@@ -235,6 +235,42 @@ Poochyena
 Level: 9
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+=== TRAINER_BUZZWOLE_GRUNT_1 ===
+Name: GRUNT
+Class: Team Aqua
+Pic: Aqua Grunt M
+Gender: Male
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Carvanha
+Level: 15
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Bite
+- Leer
+- Aqua Jet
+- Water Gun
+
+
+=== TRAINER_BUZZWOLE_GRUNT_2 ===
+Name: GRUNT
+Class: Team Aqua
+Pic: Aqua Grunt F
+Gender: Female
+Music: Aqua
+Double Battle: No
+AI: Check Bad Move
+
+Poochyena
+Level: 15
+IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
+- Bite
+- Howl
+- Tackle
+- Leer
+
+
 === TRAINER_MARCEL ===
 Name: MARCEL
 Class: Cooltrainer

@@ -315,6 +315,37 @@ PetalburgWoods_EventScript_JamesRematch::
 	msgbox PetalburgWoods_Text_IveBeenTrainingHard, MSGBOX_AUTOCLOSE
 	end
 
+PetalburgWoods_BackToBackTrainer_EventScript::
+    lock
+    faceplayer
+
+    goto_if_set FLAG_BUZZWOLE_BACK_TO_BACK_TRAINERS_DEFEATED, BackToBackTrainer_Done
+
+    msgbox BackToBack_Text_Intro1, MSGBOX_DEFAULT
+
+    trainerbattle_no_intro TRAINER_BUZZWOLE_GRUNT_1, BackToBack_Text_Lose1
+
+    msgbox BackToBack_Text_Before2, MSGBOX_DEFAULT
+
+    trainerbattle_no_intro TRAINER_BUZZWOLE_GRUNT_2, BackToBack_Text_Lose2
+
+    setflag FLAG_BUZZWOLE_BACK_TO_BACK_TRAINERS_DEFEATED
+
+	msgbox BackToBack_Text_After, MSGBOX_DEFAULT
+
+	setflag FLAG_BUZZWOLE_HIDE_BACK_TO_BACK_TRAINER_1
+    setflag FLAG_BUZZWOLE_HIDE_BACK_TO_BACK_TRAINER_2
+    removeobject 14
+    removeobject 15
+
+    release
+    end
+
+BackToBackTrainer_Done:
+    release
+    end
+
+
 PetalburgWoods_Text_NotAOneToBeFound:
 	.string "Hmmm…\n"
 	.string "Not a one to be found…$"
@@ -471,3 +502,17 @@ PetalburgWoods_Text_TrainerTipsPP:
 	.string "If a POKéMON runs out of PP, it must be\n"
 	.string "taken to a POKéMON CENTER.$"
 
+BackToBack_Text_Intro1:
+    .string "Dialogue Before back-to-back!$"
+
+BackToBack_Text_Before2:
+    .string "Dialogue in between fights!$"
+
+BackToBack_Text_Lose1:
+	.string "I lost!$"
+
+BackToBack_Text_Lose2:
+	.string "I also lost!$"
+
+BackToBack_Text_After:
+    .string "Dialogue after$"

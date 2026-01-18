@@ -56,8 +56,6 @@
             1
           ],
           "groups": {
-            "old_rod": [],
-            "good_rod": [],
             "super_rod": [
               0,
               1,
@@ -11562,6 +11560,36 @@
         {
           "map": "MAP_LITTLEROOT_TOWN",
           "base_label": "gLittlerootTown",
+          "water_mons": {
+            "encounter_rate": 4,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_SQUIRTLE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_TOTODILE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_OSHAWOTT"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_FROAKIE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_FROAKIE"
+              }
+            ]
+          },
           "fishing_mons": {
             "encounter_rate": 30,
             "mons": [
@@ -11614,36 +11642,6 @@
                 "min_level": 5,
                 "max_level": 5,
                 "species": "SPECIES_TYMPOLE"
-              }
-            ]
-          },
-          "water_mons": {
-            "encounter_rate": 4,
-            "mons": [
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_SQUIRTLE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_TOTODILE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_OSHAWOTT"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_FROAKIE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_FROAKIE"
               }
             ]
           }
