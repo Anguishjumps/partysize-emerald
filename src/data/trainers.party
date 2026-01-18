@@ -4682,45 +4682,79 @@ Double Battle: No
 AI: Basic Trainer
 Mugshot: Green
 
-Dusclops
-Level: 48
+Gengar
+Ability: Cursed Body
+Level: 97
+Timid Nature
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
-- Shadow Punch
+- Nasty Plot
 - Confuse Ray
-- Curse
-- Protect
-
-Banette
-Level: 49
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Shadow Ball
-- Grudge
-- Will O Wisp
-- Feint Attack
+- Sludge Bomb
 
-Sableye
-Level: 50
+Zoroark-Hisui @ Focus Sash
+Ability: Illusion
+Level: 98
+Timid Nature
+IVs: 0 Atk
+- Shadow Ball
+- Nasty Plot
+- Will O Wisp
+- Hyper Voice
+
+Sableye @ Sablenite
+Level: 99
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Shadow Ball
 - Double Team
 - Night Shade
 - Feint Attack
 
-Banette
-Level: 49
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+Chandelure @ Quick Claw
+Ability: Flash Fire
+Level: 98
+IVs: 0 Atk
 - Shadow Ball
 - Psychic
 - Thunderbolt
-- Facade
+- Overheat
 
-Dusclops @ Sitrus Berry
-Level: 51
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Shadow Ball
-- Ice Beam
-- Rock Slide
-- Earthquake
+Gholdengo @ Air Balloon  
+Ability: Good as Gold  
+Level: 98 
+Timid Nature  
+IVs: 0 Atk  
+- Nasty Plot  
+- Make It Rain  
+- Focus Blast  
+- Shadow Ball  
+
+Decidueye @ Spell Tag
+Ability: Long Reach
+Level: 98
+Adamant Nature
+- Swords Dance
+- Spirit Shackle
+- Leaf Blade
+- Shadow Sneak
+
+Mimikyu @ Life Orb
+Ability: Disguise
+Level: 98
+Jolly Nature
+- Swords Dance
+- Shadow Claw
+- Play Rough
+- Shadow Sneak
+
+Giratina-Origin @ Griseous Core
+Ability: Levitate
+Level: 99
+Adamant Nature
+- Poltergeist
+- Dragon Tail
+- Will-O-Wisp
+- Stone Edge
 
 === TRAINER_GLACIA ===
 Name: GLACIA
@@ -4839,7 +4873,7 @@ Level: 12
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Tackle
 - Defense Curl
-- Rock Throw
+- Magnitude
 - Rock Tomb
 
 Bonsly
@@ -4934,10 +4968,10 @@ Items: Super Potion / Super Potion
 Double Battle: No
 AI: Basic Trainer
 
-Voltorb
-Level: 20
-IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
-- Rollout
+Electrode @ Focus Sash
+Level: 22
+Jolly Nature
+- Agility
 - Spark
 - Self Destruct
 - Shock Wave
@@ -4965,6 +4999,31 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Thunder Wave
 - Shock Wave
 - Howl
+
+Galvantula
+Level: 25
+- Electroweb
+- Bug Buzz
+- Volt Switch
+- Poison Jab
+
+Raichu-Alola  
+Ability: Surge Surfer
+Level: 24
+Timid Nature
+- Nasty Plot  
+- Thunderbolt  
+- Psyshock  
+- Substitute  
+
+Rotom-Wash @ Leftovers
+Ability: Levitate
+Level: 24
+Bold Nature
+- Will-O-Wisp
+- Hydro Pump
+- Shadow Ball
+- Volt Switch
 
 === TRAINER_FLANNERY_1 ===
 Name: FLANNERY
