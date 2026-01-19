@@ -1,0 +1,57 @@
+From 553f20c5d6f1e52f1a030753ca65520351f64657 Mon Sep 17 00:00:00 2001
+From: snodlop <samkahn02@yahoo.com>
+Date: Wed, 14 Jan 2026 17:00:58 -0800
+Subject: [PATCH 05/16] route 102 edits
+
+made all trainers in route 102 (youngster calvin, bug catcher rick, youngster allen, lass tiana) unskippable. currently only rick and calvin have edited parties
+---
+ data/layouts/Route102/map.bin | Bin 2000 -> 2000 bytes
+ data/maps/Route102/map.json   |  12 ++++++------
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/data/layouts/Route102/map.bin b/data/layouts/Route102/map.bin
+index 7378bb44bbf905e707a83ac9fb25c2abb56b1547..04cf74e25c12fdbc972581b560ce227ff5e91476 100644
+GIT binary patch
+delta 32
+ocmcb>e}R7k2OBe^!RN``Y>6z_46hqbE?`SwzGrxU@@2Na0JsMXe*gdg
+
+delta 32
+ocmcb>e}R7k2OBf5!L!NSY>6zq2D}E73)m8vj~O1He3|Vp0G}}mxc~qF
+
+diff --git a/data/maps/Route102/map.json b/data/maps/Route102/map.json
+index 8ad17aae4d..c6a54f6b60 100644
+--- a/data/maps/Route102/map.json
++++ b/data/maps/Route102/map.json
+@@ -66,14 +66,14 @@
+     },
+     {
+       "graphics_id": "OBJ_EVENT_GFX_LASS",
+-      "x": 8,
+-      "y": 7,
++      "x": 11,
++      "y": 8,
+       "elevation": 3,
+-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
++      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+       "movement_range_x": 0,
+       "movement_range_y": 0,
+       "trainer_type": "TRAINER_TYPE_NORMAL",
+-      "trainer_sight_or_berry_tree_id": "3",
++      "trainer_sight_or_berry_tree_id": "6",
+       "script": "Route102_EventScript_Tiana",
+       "flag": "0"
+     },
+@@ -131,8 +131,8 @@
+     },
+     {
+       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+-      "x": 19,
+-      "y": 4,
++      "x": 16,
++      "y": 2,
+       "elevation": 3,
+       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+       "movement_range_x": 1,
+-- 
+2.52.0.windows.1
+

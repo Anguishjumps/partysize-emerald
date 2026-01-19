@@ -1,0 +1,210 @@
+From f4bc819473515319de7aaadce203e9595804f20d Mon Sep 17 00:00:00 2001
+From: snodlop <samkahn02@yahoo.com>
+Date: Thu, 15 Jan 2026 14:07:49 -0800
+Subject: [PATCH 11/16] buzzwole graphics
+
+overworld sprite for buzzwole static encounter
+---
+ data/maps/buzzwole_encounter/map.json         |   2 +-
+ .../pics/pokemon_old/buzzwole.png             | Bin 0 -> 1813 bytes
+ include/constants/event_objects.h             |   6 ++++--
+ spritesheet_rules.mk                          |   3 +++
+ .../object_events/object_event_graphics.h     |   2 ++
+ .../object_event_graphics_info.h              |  19 ++++++++++++++++++
+ .../object_event_graphics_info_pointers.h     |   2 ++
+ .../object_events/object_event_pic_tables.h   |  12 +++++++++++
+ src/event_object_movement.c                   |   1 +
+ 9 files changed, 44 insertions(+), 3 deletions(-)
+ create mode 100644 graphics/object_events/pics/pokemon_old/buzzwole.png
+
+diff --git a/data/maps/buzzwole_encounter/map.json b/data/maps/buzzwole_encounter/map.json
+index c0f67a0809..efb6d5912e 100644
+--- a/data/maps/buzzwole_encounter/map.json
++++ b/data/maps/buzzwole_encounter/map.json
+@@ -16,7 +16,7 @@
+   "object_events": [
+     {
+       "local_id": "LOCALID_PETALBURG_WOODS_BUZZWOLE",
+-      "graphics_id": "OBJ_EVENT_GFX_LUGIA",
++      "graphics_id": "OBJ_EVENT_GFX_BUZZWOLE",
+       "x": 13,
+       "y": 16,
+       "elevation": 0,
+diff --git a/graphics/object_events/pics/pokemon_old/buzzwole.png b/graphics/object_events/pics/pokemon_old/buzzwole.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2459f87cfa65b4c74939ea78f666bd0f370b3949
+GIT binary patch
+literal 1813
+zcmeAS@N?(olHy`uVBq!ia0vp^2Y^_CgBeH`yR~lzQjEnx?oJHr&dI!FU|?nl@CkAK
+z|NsBTk01Z<==icV^#2sEj}tv#mjwL}vOF7PS(Fg-%GY;?l~t6JW23sdvaBr7gi$aW
+z0>dc;SlwT_1M|XRPZ!6Kh}O3=ZdWZf;Ayekp=$T)@BOm$6mbKK2V2h8Rd0N`%=?FG
+zwTYNoiNwGC|E5m&c>Ur1N9m&Ts!NKdI0YY=z4O?OlE_1*(^bz;m{xXXx1~~yQ1#P~
+zvf=%De=5z}_rLSH&%4}x(vy|;@1ISQVV;+MzramL^TFSmw(=s*uu1WMj9bfV8qC>b
+z(~fRA{pKMj)8+3wJiN@7NOC0y|CjYQ)9q&Yqr=_TulM!Ch82gsE9Q3JC~P^BI&*r;
+zBhN>&@&-$u|2m-&quPJ|{sTj|+Wn_A`Ryg7j5}=3I6jhn&T?-jL+cBH7u@G$qt><`
+z?`UMMKRUf)8hc`fe$M2Rr<#R!?>v^^armFex?m5s%O|tve3I*TuXyod<NRQ`E4+p`
+ze_l?^T;tmjBU<<IA?J087ltqN7xT?-&3#s8ohSZ$0UOijgWNHn&Wiqe=C8Bv=qm}9
+zT+urp-n^H&Y|+QYC;eysqdlK@G`okUs&UNe@#^_&vwxE8%MHack`vq2R_<82bBBd=
+z=Z1=w!^%9zIEwG+?0W9@)c4f~lho#2m7QM3YdY^$PFT6kB78&9mGHuK20<GRuRMI?
+z^%<4lru!aWF_*k58lqWeP^W+1@y0@XJG;WQ1y5uG#1%MWP8_`w^CxG~LZ_Ie70&W@
+z=i{n&O8L}YWL=kUxMF&}=mQJJeeW#h>)Pd*G|Eib@u(?u=FCH<O<t&4NzN<`v#KnM
+zSbye0mlMaEC#&sVL=|lQGEdiJF82f5JC9W_hRksdyx+oW_oLzMyomE<pJwpROKR{|
+z^gFu1Z{ND$doL=dZW1frHM3b;^pdQ2$EB95iQiT_tO@zEvB<Ju@2U%7t?A7wWuML_
+ztz$UOyDyX>YP-YQ{BVa27C#Tz7##TA8!a1h`_s|A1#`4)vcAj{_vX@{U-fev%bUW!
+z?93aU^)ZUyZ^|BL5nIjao)CH{wNLNxuG@1No*p<QS@z)OMAP_LtS4sauVp&*LoeIL
+z-qNYA?T*Om_GHd|FVaJ0+OxIKt!FxMlQXVSQ#2&zYyQt470;sUj$UV)qCV&Q+IBPD
+z2A=YThp!jvn*TojQGC7hoiryqr&ey!H2(gWS2ec5pRMZ8dxt!Gv-wKhypA}@WtoLb
+zo*#NK!QT1+ug-Vbc|L!Ba{u)IT+F^<-JU~dnFJEM0(&`69ey?aa5`grr@)0r_Gj7C
+zvyYY8MSDa~-xAxfX5w_d@QwSY``dZ^yM9Vv@UZczQ`ZlBx4*t||MdL|<NDqTr`NSF
+zqaIxN#eKj3bNQaB`{(9fem*&t?^pHD{ZR+z9)5pf{g1El?b^TCFHFyyps)6LGN^d+
+MboFyt=akR{0Gp;1CjbBd
+
+literal 0
+HcmV?d00001
+
+diff --git a/include/constants/event_objects.h b/include/constants/event_objects.h
+index c20c2c79c3..ada6246042 100644
+--- a/include/constants/event_objects.h
++++ b/include/constants/event_objects.h
+@@ -251,7 +251,8 @@
+ // NOTE: The maximum amount of object events has been expanded from 255 to 65535.
+ // Since dynamic graphics ids still require at least 16 free values, the actual limit
+ // is 65519, but even considering follower Pokémon, this should be more than enough :)
+-#define NUM_OBJ_EVENT_GFX                        243
++#define OBJ_EVENT_GFX_BUZZWOLE                   243
++#define NUM_OBJ_EVENT_GFX                        244
+ 
+ 
+ // These are dynamic object gfx ids.
+@@ -380,7 +381,8 @@
+ #define OBJ_EVENT_PAL_TAG_LUGIA                   0x1121
+ #define OBJ_EVENT_PAL_TAG_RS_BRENDAN              0x1122
+ #define OBJ_EVENT_PAL_TAG_RS_MAY                  0x1123
+-#define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1124
++#define OBJ_EVENT_PAL_TAG_BUZZWOLE                0x1124
++#define OBJ_EVENT_PAL_TAG_DYNAMIC                 0x1125
+ 
+ #if OW_FOLLOWERS_POKEBALLS
+ // Vanilla
+diff --git a/spritesheet_rules.mk b/spritesheet_rules.mk
+index a14fd18813..231e85eade 100644
+--- a/spritesheet_rules.mk
++++ b/spritesheet_rules.mk
+@@ -444,6 +444,9 @@ $(OBJEVENTGFXDIR)/pokemon_old/latias_latios.4bpp: %.4bpp: %.png
+ $(OBJEVENTGFXDIR)/pokemon_old/lugia.4bpp: %.4bpp: %.png
+ 	$(GFX) $< $@ -mwidth 4 -mheight 4
+ 
++$(OBJEVENTGFXDIR)/pokemon_old/buzzwole.4bpp: %.4bpp: %.png
++	$(GFX) $< $@ -mwidth 4 -mheight 4
++
+ $(OBJEVENTGFXDIR)/pokemon_old/mew.4bpp: %.4bpp: %.png
+ 	$(GFX) $< $@ -mwidth 2 -mheight 4
+ 
+diff --git a/src/data/object_events/object_event_graphics.h b/src/data/object_events/object_event_graphics.h
+index 424d4224f3..7e6c4b2fc3 100755
+--- a/src/data/object_events/object_event_graphics.h
++++ b/src/data/object_events/object_event_graphics.h
+@@ -377,6 +377,7 @@ const u32 gObjectEventPic_LugiaOld[] = INCBIN_U32("graphics/object_events/pics/p
+ const u32 gObjectEventPic_HoOhOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/ho_oh.4bpp");
+ const u32 gObjectEventPic_GroudonOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/groudon.4bpp");
+ const u32 gObjectEventPic_KyogreOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/kyogre.4bpp");
++const u32 gObjectEventPic_BuzzwoleOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/buzzwole.4bpp");
+ 
+ const u32 gObjectEventPic_VigorothMover[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/vigoroth_mover.4bpp");
+ const u32 gObjectEventPic_SudowoodoTree[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/sudowoodo_tree.4bpp");
+@@ -384,6 +385,7 @@ const u32 gObjectEventPic_RayquazaCutscene[] = INCBIN_U32("graphics/object_event
+ 
+ const u16 gObjectEventPal_HoOh[] = INCBIN_U16("graphics/object_events/palettes/ho_oh.gbapal");
+ const u16 gObjectEventPal_Lugia[] = INCBIN_U16("graphics/object_events/palettes/lugia.gbapal");
++const u16 gObjectEventPal_Buzzwole[] = INCBIN_U16("graphics/object_events/palettes/buzzwole.gbapal");
+ 
+ const u16 gObjectEventPaletteLight[] = INCBIN_U16("graphics/object_events/palettes/light.gbapal");
+ const u16 gObjectEventPaletteLight2[] = INCBIN_U16("graphics/object_events/palettes/light2.gbapal");
+diff --git a/src/data/object_events/object_event_graphics_info.h b/src/data/object_events/object_event_graphics_info.h
+index 5b1c891eb4..f06986b686 100755
+--- a/src/data/object_events/object_event_graphics_info.h
++++ b/src/data/object_events/object_event_graphics_info.h
+@@ -4634,6 +4634,25 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh = {
+     .affineAnims = gDummySpriteAffineAnimTable,
+ };
+ 
++const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Buzzwole = {
++    .tileTag = TAG_NONE,
++    .paletteTag = OBJ_EVENT_PAL_TAG_BUZZWOLE,
++    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
++    .size = 512,
++    .width = 32,
++    .height = 32,
++    .paletteSlot = PALSLOT_NPC_SPECIAL,
++    .shadowSize = SHADOW_SIZE_M,
++    .inanimate = FALSE,
++    .compressed = FALSE,
++    .tracks = TRACKS_FOOT,
++    .oam = &gObjectEventBaseOam_32x32,
++    .subspriteTables = sOamTables_32x32,
++    .anims = sAnimTable_Standard,
++    .images = sPicTable_BuzzwoleOld,
++    .affineAnims = gDummySpriteAffineAnimTable,
++};
++
+ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall = {
+     .tileTag = TAG_NONE,
+     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
+diff --git a/src/data/object_events/object_event_graphics_info_pointers.h b/src/data/object_events/object_event_graphics_info_pointers.h
+index a239bce993..8e8bc99995 100755
+--- a/src/data/object_events/object_event_graphics_info_pointers.h
++++ b/src/data/object_events/object_event_graphics_info_pointers.h
+@@ -236,6 +236,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphir
+ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMay;
+ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lugia;
+ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HoOh;
++extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Buzzwole;
+ // Begin pokemon event objects
+ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall;
+ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower;
+@@ -489,6 +490,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
+     [OBJ_EVENT_GFX_LINK_RS_BRENDAN] =          &gObjectEventGraphicsInfo_RubySapphireBrendan,
+     [OBJ_EVENT_GFX_LINK_RS_MAY] =              &gObjectEventGraphicsInfo_RubySapphireMay,
+     [OBJ_EVENT_GFX_LUGIA] =                    &gObjectEventGraphicsInfo_Lugia,
++    [OBJ_EVENT_GFX_BUZZWOLE] =                 &gObjectEventGraphicsInfo_Buzzwole,
+     [OBJ_EVENT_GFX_HOOH] =                     &gObjectEventGraphicsInfo_HoOh,
+     [OBJ_EVENT_GFX_POKE_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
+     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
+diff --git a/src/data/object_events/object_event_pic_tables.h b/src/data/object_events/object_event_pic_tables.h
+index 06d353b44d..c1daba8467 100755
+--- a/src/data/object_events/object_event_pic_tables.h
++++ b/src/data/object_events/object_event_pic_tables.h
+@@ -1345,6 +1345,18 @@ static const struct SpriteFrameImage sPicTable_HoOhOld[] = {
+     overworld_frame(gObjectEventPic_HoOhOld, 4, 4, 1),
+ };
+ 
++static const struct SpriteFrameImage sPicTable_BuzzwoleOld[] = {
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 1),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 1),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 0),
++    overworld_frame(gObjectEventPic_BuzzwoleOld, 4, 4, 1),
++};
++
+ static const struct SpriteFrameImage sPicTable_RubySapphireBrendan[] = {
+     overworld_ascending_frames(gObjectEventPic_RubySapphireBrendanNormal, 2, 4),
+ };
+diff --git a/src/event_object_movement.c b/src/event_object_movement.c
+index 848289aec7..716df427c5 100644
+--- a/src/event_object_movement.c
++++ b/src/event_object_movement.c
+@@ -522,6 +522,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
+     {gObjectEventPal_BirthIslandStone,      OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE},
+     {gObjectEventPal_HoOh,                  OBJ_EVENT_PAL_TAG_HO_OH},
+     {gObjectEventPal_Lugia,                 OBJ_EVENT_PAL_TAG_LUGIA},
++    {gObjectEventPal_Buzzwole,              OBJ_EVENT_PAL_TAG_BUZZWOLE},
+     {gObjectEventPal_RubySapphireBrendan,   OBJ_EVENT_PAL_TAG_RS_BRENDAN},
+     {gObjectEventPal_RubySapphireMay,       OBJ_EVENT_PAL_TAG_RS_MAY},
+ #if OW_FOLLOWERS_POKEBALLS
+-- 
+2.52.0.windows.1
+

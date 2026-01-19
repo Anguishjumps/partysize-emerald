@@ -1,0 +1,241 @@
+From 80a5292eaec0444aec9c473cb1cddf939c89382e Mon Sep 17 00:00:00 2001
+From: snodlop <samkahn02@yahoo.com>
+Date: Wed, 14 Jan 2026 22:58:53 -0800
+Subject: [PATCH 08/16] buzzwole area
+
+adds a new map location attached to petalburg woods, with buzzwole planned as a static encounter (as of now unimplemented)
+---
+ data/event_scripts.s                          |   2 +
+ data/layouts/PetalburgWoods/map.bin           | Bin 4224 -> 4752 bytes
+ data/layouts/buzzwole_encounter/border.bin    | Bin 0 -> 8 bytes
+ data/layouts/buzzwole_encounter/map.bin       | Bin 0 -> 512 bytes
+ data/layouts/layouts.json                     |  12 ++++-
+ data/maps/PetalburgWoods/map.json             |  14 +++++
+ data/maps/buzzwole_encounter/map.json         |  50 ++++++++++++++++++
+ data/maps/buzzwole_encounter/scripts.inc      |   2 +
+ data/maps/map_groups.json                     |   6 ++-
+ .../primary/general/metatile_attributes.bin   | Bin 1024 -> 1024 bytes
+ data/tilesets/primary/general/metatiles.bin   | Bin 8192 -> 8192 bytes
+ 11 files changed, 84 insertions(+), 2 deletions(-)
+ create mode 100644 data/layouts/buzzwole_encounter/border.bin
+ create mode 100644 data/layouts/buzzwole_encounter/map.bin
+ create mode 100644 data/maps/buzzwole_encounter/map.json
+ create mode 100644 data/maps/buzzwole_encounter/scripts.inc
+
+diff --git a/data/event_scripts.s b/data/event_scripts.s
+index 73b171c206..0b2d8ab946 100644
+--- a/data/event_scripts.s
++++ b/data/event_scripts.s
+@@ -1163,3 +1163,5 @@ EventScript_VsSeekerChargingDone::
+ 	.include "data/scripts/dexnav.inc"
+ 	.include "data/scripts/battle_frontier.inc"
+ 	.include "data/scripts/apricorn_tree.inc"
++
++	.include "data/maps/buzzwole_encounter/scripts.inc"
+diff --git a/data/layouts/PetalburgWoods/map.bin b/data/layouts/PetalburgWoods/map.bin
+index a032b4c43aa9b520fd911bc2ec1b56ec8ff1abf5..4cbb8dd22fbecdc2a4af3ed7538f759ffaae7f9c 100644
+GIT binary patch
+delta 470
+zcmYjNJxc>Y5cQJV&EDPSLkS^ZkSI|^ED|DCf<b}=Ns&V0Ay=GWks_tFSVl>4n`dER
+zad!CuDJ`zBNR>2xfVF}@AcaLhcP|oT7-rrZc=KkiR=su46%{UASNL26sz+XPMN5J#
+z?zEa<a+t-p>;?q{8b_BgR4BtmWE-uBoHFzyHts3!aT8{=i8>G2Ry1Tqz%Z0;*W&Q4
+z6pDHS6DtQ#Z;0bGzI0o{430=s!9G!N4e!PZid6sGmdCA?M~5cRFc@y=t{9{-q%%=h
+zuHA|?l>-qNxQ?B$SMo-l$qNxzIZSodV|(!r@=4~22W=TPJ6NJ+75f^EY5FYSv(rUd
+z9+k!=XJJf6BuxCUv$-l9<6N5DkR}g9V>@PD8S0pJ2q$J8uC9wVQ@7VFTYc5H)QfvO
+ze6cG_JB26i2%bVA?nopyGw=w7AFoJKbh4Pnt0A9-lc?g7aJb1F9urk1l$;64;&TN5
+F(Jv+;pXC4m
+
+delta 304
+zcmX9)El<Nx6iv%}+w1!EMkbo2fsza|S%I7&WFZZysF)z6;*uZ{`w0_BL?6c@CJ+b&
+zVm|<hKukb_fMgO`fhOD*adPgtIXU;E+F$HdWNKmNC7!Iv)LAPgxV94W5#hzkFts8a
+z+L;+eSlStWYyxc&UKwk5fL!Fb7X&Q{g^E#n3QIY`H|tr4@XWYm-%&Sj{g2E-5$230
+zdJ`&;(x{cfz!{k&206zaD}9si5-aCiTIr|!!fx*ZH$B3_AEF905;s8Vjyb#8<9|ls
+z<#_O#gOGML#(vKBR@Q!rvw+N%hjlQ6(nFkvC%6lVYhsR3=_xk4br=1T%N_jo4~!PK
+K+x!>-ZvFun(`pC+
+
+diff --git a/data/layouts/buzzwole_encounter/border.bin b/data/layouts/buzzwole_encounter/border.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..03bcafef11c023f00c3224c266e39a2dfd4aaa44
+GIT binary patch
+literal 8
+Pcmcb@c$M)E<6TAo5a0u6
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/buzzwole_encounter/map.bin b/data/layouts/buzzwole_encounter/map.bin
+new file mode 100644
+index 0000000000000000000000000000000000000000..09604e2fa236f76b95f72dca46a33824758b1e88
+GIT binary patch
+literal 512
+zcmaiuK?;B{3<L?d|FH)@?1Sp1>P2t*4+%050#(YAbd%Y(X;u5sp;KSlv@41%yv$y@
+z<-%tV&c^rn-Dm8<F((5aKUSY*F3vsMhS{PQd*`brt7R$Cr+5DEeg5wmS&=6vSNLAd
+J`}yAE@E=qqwblRt
+
+literal 0
+HcmV?d00001
+
+diff --git a/data/layouts/layouts.json b/data/layouts/layouts.json
+index b8d841f72b..4ef0d74f72 100644
+--- a/data/layouts/layouts.json
++++ b/data/layouts/layouts.json
+@@ -1344,7 +1344,7 @@
+     {
+       "id": "LAYOUT_PETALBURG_WOODS",
+       "name": "PetalburgWoods_Layout",
+-      "width": 48,
++      "width": 54,
+       "height": 44,
+       "primary_tileset": "gTileset_General",
+       "secondary_tileset": "gTileset_Rustboro",
+@@ -4410,6 +4410,16 @@
+       "secondary_tileset": "gTileset_MysteryEventsHouse",
+       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
+       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
++    },
++    {
++      "id": "LAYOUT_BUZZWOLE_ENCOUNTER",
++      "name": "buzzwole_encounter_Layout",
++      "width": 16,
++      "height": 16,
++      "primary_tileset": "gTileset_General",
++      "secondary_tileset": "gTileset_Petalburg",
++      "border_filepath": "data/layouts/buzzwole_encounter/border.bin",
++      "blockdata_filepath": "data/layouts/buzzwole_encounter/map.bin"
+     }
+   ]
+ }
+diff --git a/data/maps/PetalburgWoods/map.json b/data/maps/PetalburgWoods/map.json
+index 3a68525fa7..35deb2acf5 100644
+--- a/data/maps/PetalburgWoods/map.json
++++ b/data/maps/PetalburgWoods/map.json
+@@ -228,6 +228,20 @@
+       "elevation": 0,
+       "dest_map": "MAP_ROUTE104",
+       "dest_warp_id": "7"
++    },
++    {
++      "x": 48,
++      "y": 22,
++      "elevation": 0,
++      "dest_map": "MAP_BUZZWOLE_ENCOUNTER",
++      "dest_warp_id": "0"
++    },
++    {
++      "x": 48,
++      "y": 23,
++      "elevation": 0,
++      "dest_map": "MAP_BUZZWOLE_ENCOUNTER",
++      "dest_warp_id": "1"
+     }
+   ],
+   "coord_events": [
+diff --git a/data/maps/buzzwole_encounter/map.json b/data/maps/buzzwole_encounter/map.json
+new file mode 100644
+index 0000000000..64914ba4d6
+--- /dev/null
++++ b/data/maps/buzzwole_encounter/map.json
+@@ -0,0 +1,50 @@
++{
++  "id": "MAP_BUZZWOLE_ENCOUNTER",
++  "name": "buzzwole_encounter",
++  "layout": "LAYOUT_BUZZWOLE_ENCOUNTER",
++  "music": "MUS_PETALBURG_WOODS",
++  "region_map_section": "MAPSEC_NONE",
++  "requires_flash": false,
++  "weather": "WEATHER_SHADE",
++  "map_type": "MAP_TYPE_UNKNOWN",
++  "allow_cycling": true,
++  "allow_escaping": false,
++  "allow_running": true,
++  "show_map_name": true,
++  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
++  "connections": null,
++  "object_events": [
++    {
++      "local_id": "buzzwolestatic",
++      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
++      "x": 11,
++      "y": 8,
++      "elevation": 0,
++      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
++      "movement_range_x": 0,
++      "movement_range_y": 0,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "NULL",
++      "flag": "0"
++    }
++  ],
++  "warp_events": [
++    {
++      "x": 1,
++      "y": 8,
++      "elevation": 0,
++      "dest_map": "MAP_PETALBURG_WOODS",
++      "dest_warp_id": "6"
++    },
++    {
++      "x": 1,
++      "y": 9,
++      "elevation": 0,
++      "dest_map": "MAP_PETALBURG_WOODS",
++      "dest_warp_id": "7"
++    }
++  ],
++  "coord_events": [],
++  "bg_events": []
++}
+diff --git a/data/maps/buzzwole_encounter/scripts.inc b/data/maps/buzzwole_encounter/scripts.inc
+new file mode 100644
+index 0000000000..b62ee7d347
+--- /dev/null
++++ b/data/maps/buzzwole_encounter/scripts.inc
+@@ -0,0 +1,2 @@
++buzzwole_encounter_MapScripts::
++	.byte 0
+diff --git a/data/maps/map_groups.json b/data/maps/map_groups.json
+index 78e82055f6..1a416d0954 100644
+--- a/data/maps/map_groups.json
++++ b/data/maps/map_groups.json
+@@ -33,7 +33,8 @@
+     "gMapGroup_IndoorRoute113",
+     "gMapGroup_IndoorRoute123",
+     "gMapGroup_IndoorRoute119",
+-    "gMapGroup_IndoorRoute124"
++    "gMapGroup_IndoorRoute124",
++    "gMapGroup_UltraBeastEncounterRooms"
+   ],
+   "gMapGroup_TownsAndRoutes": [
+     "PetalburgCity",
+@@ -620,5 +621,8 @@
+   ],
+   "gMapGroup_IndoorRoute124": [
+     "Route124_DivingTreasureHuntersHouse"
++  ],
++  "gMapGroup_UltraBeastEncounterRooms": [
++    "buzzwole_encounter"
+   ]
+ }
+diff --git a/data/tilesets/primary/general/metatile_attributes.bin b/data/tilesets/primary/general/metatile_attributes.bin
+index d9cd29016d792fb568494dbf2f820100081a14f8..52c542f1a60e465ee8f1dafe33463abd2e2e2282 100644
+GIT binary patch
+delta 44
+qcmZqRXyBNzgE492&W((s$qWb}E+8(T2!u(K>zR%+CQo){-VFfjS_(A)
+
+delta 46
+rcmZqRXyBNzWAX)N&W#6GGKw-F0dWCw0YxBWm|V|vl#yYwEAwsu2p9?(
+
+diff --git a/data/tilesets/primary/general/metatiles.bin b/data/tilesets/primary/general/metatiles.bin
+index af899bcc5efa4bdd3ab1f418b371a866441207c9..0e7c1e6fb909ecf3a9f126d713df26854d0af4dc 100644
+GIT binary patch
+delta 92
+zcmZp0XmHqYfK|ZK&<Y4G4H-Z{;f%uO3#<*ia8X7DMujsf3@VcogeUN!D&71~Scwfq
+NA<zJo%?45zSON8I6fFP%
+
+delta 79
+scmZp0XmHqYfK`A24Q#%^+Q5q;Iypgj!UT!U93m2I7;>8pq%N=m0KNeVH~;_u
+
+-- 
+2.52.0.windows.1
+

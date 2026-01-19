@@ -1,0 +1,47 @@
+From 487efce8d82e86c4f8c6b1e9e7d3864b455dff0c Mon Sep 17 00:00:00 2001
+From: snodlop <samkahn02@yahoo.com>
+Date: Thu, 15 Jan 2026 11:23:03 -0800
+Subject: [PATCH 10/16] buzzwole part 2
+
+nvm i'm stupid i fucked up the scripting
+---
+ data/maps/buzzwole_encounter/scripts.inc | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/data/maps/buzzwole_encounter/scripts.inc b/data/maps/buzzwole_encounter/scripts.inc
+index 8fe8201007..affed50365 100644
+--- a/data/maps/buzzwole_encounter/scripts.inc
++++ b/data/maps/buzzwole_encounter/scripts.inc
+@@ -4,11 +4,11 @@ buzzwole_encounter_MapScripts::
+ 	.byte 0
+ 
+ buzzwole_encounter_OnTransition:
+-	call_if_set FLAG_CAUGHT_BUZZWOLE, buzzwole_enounter_EventScript_HideBuzzwole
++	call_if_set FLAG_CAUGHT_BUZZWOLE, buzzwole_encounter_EventScript_HideBuzzwole
+ 	call_if_unset FLAG_CAUGHT_BUZZWOLE, buzzwole_encounter_EventScript_TryShowBuzzwole
+ 	end
+ 
+-buzzwole_encounter_EventScript_HideLugia::
++buzzwole_encounter_EventScript_HideBuzzwole::
+ 	setflag FLAG_HIDE_BUZZWOLE
+ 	return
+ 
+@@ -49,13 +49,13 @@ buzzwole_encounter_EventScript_Buzzwole::
+ 	release
+ 	end
+ 
+-NavelRock_Bottom_EventScript_DefeatedBuzzwole::
++buzzwole_encounter_EventScript_DefeatedBuzzwole::
+ 	setflag FLAG_DEFEATED_BUZZWOLE
+ 	setvar VAR_0x8004, SPECIES_BUZZWOLE
+ 	goto Common_EventScript_LegendaryFlewAway
+ 	end
+ 
+-NavelRock_Bottom_EventScript_RanFromBuzzwole::
++buzzwole_encounter_EventScript_RanFromBuzzwole::
+ 	setvar VAR_0x8004, SPECIES_BUZZWOLE
+ 	goto Common_EventScript_LegendaryFlewAway
+ 	end
+-- 
+2.52.0.windows.1
+

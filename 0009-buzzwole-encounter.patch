@@ -1,0 +1,174 @@
+From 337989fc2feab4885cb31db0efa00cbe39cced10 Mon Sep 17 00:00:00 2001
+From: snodlop <samkahn02@yahoo.com>
+Date: Thu, 15 Jan 2026 10:51:03 -0800
+Subject: [PATCH 09/16] buzzwole encounter
+
+should be all the scripting and flags needed, everything but the sprite
+---
+ data/layouts/buzzwole_encounter/map.bin  | Bin 512 -> 960 bytes
+ data/layouts/layouts.json                |   4 +-
+ data/maps/buzzwole_encounter/map.json    |  22 ++++-----
+ data/maps/buzzwole_encounter/scripts.inc |  59 +++++++++++++++++++++++
+ include/constants/flags.h                |   6 +--
+ 5 files changed, 75 insertions(+), 16 deletions(-)
+
+diff --git a/data/layouts/buzzwole_encounter/map.bin b/data/layouts/buzzwole_encounter/map.bin
+index 09604e2fa236f76b95f72dca46a33824758b1e88..4557600d88f1ca4150150a7f44e35c7dfd158b32 100644
+GIT binary patch
+literal 960
+zcma)%OA5m<3`8+R_h}Zra1WGh^4YYz_8w(u9}Ge!#)z>sqi1`IJ+^^*#w$kZh%>6<
+z4!j=g9iLF)lSkpS+i&SCk30&8985SUzN<XuQTN&Ft~RkAjeb_~mRSFFZ_B*SIis_9
+zybG;z^7toOF)N;CGqd7p)^p;I@OU@xa&;bk@~)nvPu|u4OrLyKnDohK6_dZpBY&lt
+N(>q^r@O$&Q{{<dCRFePz
+
+delta 98
+zcmX@W-oP?JVWNh@!~lVb8#pEwNKBj{F>!;!#2X5ezc30+764)mMk%I6jFT8eCMPg*
+iO)g?o1Iuh+6c9OQc-{~lPnKa;ne4%=Fu4GTfiwV`iXqkj
+
+diff --git a/data/layouts/layouts.json b/data/layouts/layouts.json
+index 4ef0d74f72..f11014c076 100644
+--- a/data/layouts/layouts.json
++++ b/data/layouts/layouts.json
+@@ -4414,8 +4414,8 @@
+     {
+       "id": "LAYOUT_BUZZWOLE_ENCOUNTER",
+       "name": "buzzwole_encounter_Layout",
+-      "width": 16,
+-      "height": 16,
++      "width": 20,
++      "height": 24,
+       "primary_tileset": "gTileset_General",
+       "secondary_tileset": "gTileset_Petalburg",
+       "border_filepath": "data/layouts/buzzwole_encounter/border.bin",
+diff --git a/data/maps/buzzwole_encounter/map.json b/data/maps/buzzwole_encounter/map.json
+index 64914ba4d6..c0f67a0809 100644
+--- a/data/maps/buzzwole_encounter/map.json
++++ b/data/maps/buzzwole_encounter/map.json
+@@ -15,30 +15,30 @@
+   "connections": null,
+   "object_events": [
+     {
+-      "local_id": "buzzwolestatic",
+-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
+-      "x": 11,
+-      "y": 8,
++      "local_id": "LOCALID_PETALBURG_WOODS_BUZZWOLE",
++      "graphics_id": "OBJ_EVENT_GFX_LUGIA",
++      "x": 13,
++      "y": 16,
+       "elevation": 0,
+-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+-      "movement_range_x": 0,
+-      "movement_range_y": 0,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 1,
++      "movement_range_y": 1,
+       "trainer_type": "TRAINER_TYPE_NONE",
+       "trainer_sight_or_berry_tree_id": "0",
+-      "script": "NULL",
+-      "flag": "0"
++      "script": "buzzwole_encounter_EventScript_Buzzwole",
++      "flag": "FLAG_HIDE_BUZZWOLE"
+     }
+   ],
+   "warp_events": [
+     {
+-      "x": 1,
++      "x": 5,
+       "y": 8,
+       "elevation": 0,
+       "dest_map": "MAP_PETALBURG_WOODS",
+       "dest_warp_id": "6"
+     },
+     {
+-      "x": 1,
++      "x": 5,
+       "y": 9,
+       "elevation": 0,
+       "dest_map": "MAP_PETALBURG_WOODS",
+diff --git a/data/maps/buzzwole_encounter/scripts.inc b/data/maps/buzzwole_encounter/scripts.inc
+index b62ee7d347..8fe8201007 100644
+--- a/data/maps/buzzwole_encounter/scripts.inc
++++ b/data/maps/buzzwole_encounter/scripts.inc
+@@ -1,2 +1,61 @@
+ buzzwole_encounter_MapScripts::
++	map_script MAP_SCRIPT_ON_TRANSITION, buzzwole_encounter_OnTransition
++	map_script MAP_SCRIPT_ON_RESUME, buzzwole_encounter_OnResume
+ 	.byte 0
++
++buzzwole_encounter_OnTransition:
++	call_if_set FLAG_CAUGHT_BUZZWOLE, buzzwole_enounter_EventScript_HideBuzzwole
++	call_if_unset FLAG_CAUGHT_BUZZWOLE, buzzwole_encounter_EventScript_TryShowBuzzwole
++	end
++
++buzzwole_encounter_EventScript_HideLugia::
++	setflag FLAG_HIDE_BUZZWOLE
++	return
++
++buzzwole_encounter_EventScript_TryShowBuzzwole::
++	goto_if_set FLAG_DEFEATED_BUZZWOLE, Common_EventScript_NopReturn
++	clearflag FLAG_HIDE_BUZZWOLE
++	return
++
++buzzwole_encounter_OnResume:
++	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, buzzwole_encounter_EventScript_TryRemoveBuzzwole
++	end
++
++buzzwole_encounter_EventScript_TryRemoveBuzzwole::
++	specialvar VAR_RESULT, GetBattleOutcome
++	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
++	removeobject LOCALID_PETALBURG_WOODS_BUZZWOLE
++	return
++
++buzzwole_encounter_EventScript_Buzzwole::
++	lock
++	faceplayer
++	waitse
++	delay 50
++	waitse
++	playmoncry SPECIES_BUZZWOLE, CRY_MODE_ENCOUNTER
++	waitmoncry
++	delay 20
++	seteventmon SPECIES_BUZZWOLE, 20
++	setflag FLAG_SYS_CTRL_OBJ_DELETE
++	special BattleSetup_StartLegendaryBattle
++	waitstate
++	clearflag FLAG_SYS_CTRL_OBJ_DELETE
++	specialvar VAR_RESULT, GetBattleOutcome
++	goto_if_eq VAR_RESULT, B_OUTCOME_WON, buzzwole_encounter_EventScript_DefeatedBuzzwole
++	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, buzzwole_encounter_EventScript_RanFromBuzzwole
++	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, buzzwole_encounter_EventScript_RanFromBuzzwole
++	setflag FLAG_CAUGHT_BUZZWOLE
++	release
++	end
++
++NavelRock_Bottom_EventScript_DefeatedBuzzwole::
++	setflag FLAG_DEFEATED_BUZZWOLE
++	setvar VAR_0x8004, SPECIES_BUZZWOLE
++	goto Common_EventScript_LegendaryFlewAway
++	end
++
++NavelRock_Bottom_EventScript_RanFromBuzzwole::
++	setvar VAR_0x8004, SPECIES_BUZZWOLE
++	goto Common_EventScript_LegendaryFlewAway
++	end
+diff --git a/include/constants/flags.h b/include/constants/flags.h
+index 110ebdcd88..80c8c59453 100644
+--- a/include/constants/flags.h
++++ b/include/constants/flags.h
+@@ -516,9 +516,9 @@
+ #define FLAG_DEFEATED_HO_OH                  0x1DC
+ #define FLAG_DEFEATED_LUGIA                  0x1DD
+ 
+-#define FLAG_UNUSED_0x1DE                    0x1DE // Unused Flag
+-#define FLAG_UNUSED_0x1DF                    0x1DF // Unused Flag
+-#define FLAG_UNUSED_0x1E0                    0x1E0 // Unused Flag
++#define FLAG_CAUGHT_BUZZWOLE                    0x1DE // Unused Flag
++#define FLAG_DEFEATED_BUZZWOLE                    0x1DF // Unused Flag
++#define FLAG_HIDE_BUZZWOLE                    0x1E0 // Unused Flag
+ #define FLAG_UNUSED_0x1E1                    0x1E1 // Unused Flag
+ #define FLAG_UNUSED_0x1E2                    0x1E2 // Unused Flag
+ #define FLAG_UNUSED_0x1E3                    0x1E3 // Unused Flag
+-- 
+2.52.0.windows.1
+

@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Plasma Fists does not set up Ion Deluge if it does not conne
 SINGLE_BATTLE_TEST("Plasma Fists type-changing effect does not override Pixilate")
 {
     GIVEN {
-        PLAYER(SPECIES_KRABBY) { Speed(300); }
+        PLAYER(SPECIES_KRABBY) { Speed(300); };
         OPPONENT(SPECIES_SYLVEON) { Speed(1); Ability(ABILITY_PIXILATE); }
     } WHEN {
         TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_SCRATCH); }
@@ -113,6 +113,40 @@ SINGLE_BATTLE_TEST("Plasma Fists turns normal type dynamax-moves into electric t
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, player);
         MESSAGE("A deluge of ions showers the battlefield!");
         MESSAGE("The opposing Wobbuffet used Max Lightning!");
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Plasma Fists type-changing effect does not override Pixilate (Multi)")
+{
+    GIVEN {
+        PLAYER(SPECIES_KRABBY) { Speed(300); };
+        OPPONENT(SPECIES_SYLVEON) { Speed(1); Ability(ABILITY_CUTE_CHARM); Innates(ABILITY_PIXILATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Krabby used Plasma Fists!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, player);
+        MESSAGE("A deluge of ions showers the battlefield!");
+        MESSAGE("The opposing Sylveon used Scratch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        NOT MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Plasma Fists type-changing effect is applied after Normalize")
+{
+    GIVEN {
+        PLAYER(SPECIES_KRABBY);
+        OPPONENT(SPECIES_SKITTY) { Ability(ABILITY_CUTE_CHARM); Innates(ABILITY_NORMALIZE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_EMBER); }
+    } SCENE {
+        MESSAGE("Krabby used Plasma Fists!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, player);
+        MESSAGE("A deluge of ions showers the battlefield!");
+        MESSAGE("The opposing Skitty used Ember!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
         MESSAGE("It's super effective!");
     }
 }

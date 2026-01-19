@@ -3663,6 +3663,11 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     for (i = 0; i < NUM_BATTLE_STATS; i++)
         dst->statStages[i] = DEFAULT_STAT_STAGE;
 
+    for (i = 0; i < MAX_MON_INNATES; i++)
+    {
+        dst->innates[i] = GetSpeciesInnate(dst->species, i + 1);
+    }
+
     memset(&dst->volatiles, 0, sizeof(struct Volatiles));
 }
 
@@ -6337,14 +6342,13 @@ static s32 GetWildMonTableIdInAlteringCave(u16 species)
 
 static inline bool32 CanFirstMonBoostHeldItemRarity(void)
 {
-    enum Ability ability;
     if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return FALSE;
 
-    ability = GetMonAbility(&gPlayerParty[0]);
-    if (ability == ABILITY_COMPOUND_EYES)
+    //ability = GetMonAbility(&gPlayerParty[0]);
+    if (MonHasTrait(&gPlayerParty[0], ABILITY_COMPOUND_EYES))
         return TRUE;
-    else if ((OW_SUPER_LUCK >= GEN_8) && ability == ABILITY_SUPER_LUCK)
+    else if ((OW_SUPER_LUCK >= GEN_8) && MonHasTrait(&gPlayerParty[0], ABILITY_SUPER_LUCK))
         return TRUE;
     return FALSE;
 }
@@ -7154,19 +7158,10 @@ bool32 TryFormChange(u32 monId, enum BattleSide side, enum FormChanges method)
     u32 currentSpecies = GetMonData(&party[monId], MON_DATA_SPECIES);
     u32 targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
 
-    // If the battle ends, and there's not a specified species to change back to,,
-    // use the species at the start of the battle.
-    if (targetSpecies == SPECIES_NONE
-        && gBattleStruct != NULL
-        && gBattleStruct->partyState[side][monId].changedSpecies != SPECIES_NONE
-        // This is added to prevent FORM_CHANGE_END_BATTLE_ENVIRONMENT from omitting move changes
-        // at the end of the battle, as it was being counting as a successful form change.
-        && method == FORM_CHANGE_END_BATTLE)
-    {
+    if (targetSpecies == currentSpecies && gBattleStruct != NULL && gBattleStruct->partyState[side][monId].changedSpecies != SPECIES_NONE)
         targetSpecies = gBattleStruct->partyState[side][monId].changedSpecies;
-    }
 
-    if (targetSpecies != currentSpecies && targetSpecies != SPECIES_NONE)
+    if (targetSpecies != currentSpecies)
     {
         TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
@@ -7376,7 +7371,7 @@ void UpdateDaysPassedSinceFormChange(u16 days)
         {
             u32 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_DAYS_PASSED, 0);
 
-            if (targetSpecies != currentSpecies && targetSpecies != SPECIES_NONE)
+            if (targetSpecies != currentSpecies)
             {
                 SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
                 CalculateMonStats(mon);
@@ -7495,3 +7490,43 @@ bool32 IsSpeciesOfType(u32 species, enum Type type)
         return TRUE;
     return FALSE;
 }
+
+//Returns the slot the Innate is found in, assuming the Ability is already slot 1.  Returns 0 if not found.
+u8 SpeciesHasInnate(u16 species, u16 ability) {
+    u8 i;
+    u8 innateNum = 0;
+
+    for (i = 0; i < MAX_MON_INNATES; i++)
+    {
+        if (gSpeciesInfo[species].innates[i] == ability)
+            {
+                innateNum = i + 2;
+                //DebugPrintf("INNATE FOUND: %d", innateNum - 1);
+            }
+    }
+
+        return innateNum;
+}
+
+bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability)
+{
+    u16 species = GetBoxMonData(boxmon, MON_DATA_SPECIES, NULL);
+
+    return SpeciesHasInnate(species, ability);
+}
+
+bool8 MonHasTrait(struct Pokemon *mon, u16 ability)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
+    return (GetMonAbility(mon) == ability || SpeciesHasInnate(species, ability));
+} 
+
+enum Ability GetSpeciesInnate(u16 species, u8 traitNum)
+{
+    if (MAX_MON_INNATES > 0)
+            return gSpeciesInfo[species].innates[traitNum - 1];
+    else
+        return 0;
+}
+
