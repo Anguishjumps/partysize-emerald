@@ -436,7 +436,7 @@ static const struct SlidingWindow sAppealJamSlidingWindow =
     .left = 0,
     .top = 45
 };
-static const s8 sMultiBattleOrder[] = {0, 2, 3, 1, 4, 5};
+static const s8 sMultiBattleOrder[] = {0, 2, 3, 4, 1, 5, 6, 7};
 static const int offset = 22; //offest to make template calculations easier
 static const struct WindowTemplate sSummaryTemplate[] =
 {
@@ -3857,7 +3857,7 @@ static bool8 IsInGamePartnerMon(void)
 {
     if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gMain.inBattle)
     {
-        if (sMonSummaryScreen->curMonIndex == 1 || sMonSummaryScreen->curMonIndex == 4 || sMonSummaryScreen->curMonIndex == 5)
+        if (sMonSummaryScreen->curMonIndex == 1 || sMonSummaryScreen->curMonIndex == 5 || sMonSummaryScreen->curMonIndex == 6 || sMonSummaryScreen->curMonIndex == 7)
             return TRUE;
     }
     return FALSE;
@@ -4039,7 +4039,7 @@ static void PrintHeldItemName(void)
 
     if (sMonSummaryScreen->summary.item == ITEM_ENIGMA_BERRY_E_READER
         && IsMultiBattle() == TRUE
-        && (sMonSummaryScreen->curMonIndex == 1 || sMonSummaryScreen->curMonIndex == 4 || sMonSummaryScreen->curMonIndex == 5))
+        && (sMonSummaryScreen->curMonIndex == 1 || sMonSummaryScreen->curMonIndex == 5 || sMonSummaryScreen->curMonIndex == 6 || sMonSummaryScreen->curMonIndex == 7))
     {
         text = GetItemName(ITEM_ENIGMA_BERRY_E_READER);
     }

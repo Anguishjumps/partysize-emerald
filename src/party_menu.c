@@ -1795,7 +1795,9 @@ static void UpdatePartySelectionSingleLayout(s8 *slotPtr, s8 movementDir)
             }
             else //Move Down
             {
-                (*slotPtr)+=2;
+                if (*slotPtr+2 < gPlayerPartyCount){
+                    (*slotPtr)+=2;
+                }
             }
         }
         break;
@@ -1817,96 +1819,61 @@ static void UpdatePartySelectionSingleLayout(s8 *slotPtr, s8 movementDir)
 static void UpdatePartySelectionDoubleLayout(s8 *slotPtr, s8 movementDir)
 {
     // PARTY_SIZE + 1 is Cancel, PARTY_SIZE is Confirm
-    // newSlot is used temporarily as a movement direction during its later assignment
-    s8 newSlot = movementDir;
-
     switch (movementDir)
     {
     case MENU_DIR_UP:
-        if (*slotPtr == 0)
+        if (*slotPtr == 0 || *slotPtr == 1) //Top 2 Slots -> Loop to Cancel Button
         {
             *slotPtr = PARTY_SIZE + 1;
-            break;
         }
         else if (*slotPtr == PARTY_SIZE)
         {
             *slotPtr = gPlayerPartyCount - 1;
-            break;
         }
         else if (*slotPtr == PARTY_SIZE + 1)
         {
             if (sPartyMenuInternal->chooseHalf)
-            {
                 *slotPtr = PARTY_SIZE;
-                break;
-            }
-            (*slotPtr)--;
+            else
+                *slotPtr = gPlayerPartyCount - 1;
         }
-        newSlot = GetNewSlotDoubleLayout(*slotPtr, newSlot);
-        if (newSlot != -1)
-            *slotPtr = newSlot;
+        else //Move Up
+        {
+            (*slotPtr)-=2;
+        }
         break;
     case MENU_DIR_DOWN:
-        if (*slotPtr == PARTY_SIZE)
-        {
-            *slotPtr = PARTY_SIZE + 1;
-        }
-        else if (*slotPtr == PARTY_SIZE + 1)
+        if (*slotPtr == PARTY_SIZE + 1) //Hovering over cancel button -> Loop to top
         {
             *slotPtr = 0;
         }
         else
         {
-            newSlot = GetNewSlotDoubleLayout(*slotPtr, MENU_DIR_DOWN);
-            if (newSlot == -1)
+            if (*slotPtr == gPlayerPartyCount - 1 || (*slotPtr + 2 >= PARTY_SIZE)) //Last Party Slot -> move to confirm/cancel
             {
                 if (sPartyMenuInternal->chooseHalf)
                     *slotPtr = PARTY_SIZE;
                 else
                     *slotPtr = PARTY_SIZE + 1;
             }
-            else
+            else //Move Down
             {
-                *slotPtr = newSlot;
+                if (*slotPtr+2 < gPlayerPartyCount){
+                    (*slotPtr)+=2;
+                }
             }
         }
         break;
     case MENU_DIR_RIGHT:
-        if (*slotPtr == 0)
+        if ((*slotPtr % 2 == 0) && *slotPtr+1 < gPlayerPartyCount && *slotPtr != PARTY_SIZE && *slotPtr != PARTY_SIZE + 1)
         {
-            if (sPartyMenuInternal->lastSelectedSlot == 3)
-            {
-                if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES) != SPECIES_NONE)
-                    *slotPtr = 3;
-            }
-            else if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES) != SPECIES_NONE)
-            {
-                *slotPtr = 2;
-            }
-        }
-        else if (*slotPtr == 1)
-        {
-            if (sPartyMenuInternal->lastSelectedSlot == 5)
-            {
-                if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
-                    *slotPtr = 5;
-            }
-            else if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE)
-            {
-                *slotPtr = 4;
-            }
+            *slotPtr += 1;
         }
         break;
     case MENU_DIR_LEFT:
-        if (*slotPtr == 2 || *slotPtr == 3)
+        if ((*slotPtr % 2 != 0) && *slotPtr != PARTY_SIZE && *slotPtr != PARTY_SIZE + 1)
         {
-            sPartyMenuInternal->lastSelectedSlot = *slotPtr;
-            *slotPtr = 0;
-        }
-        else if (*slotPtr == 4 || *slotPtr == 5)
-        {
-            sPartyMenuInternal->lastSelectedSlot = *slotPtr;
-            *slotPtr = 1;
+            *slotPtr -= 1;
         }
         break;
     }
