@@ -4617,6 +4617,42 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_Everstone,
     },
 
+    [ITEM_SCARLET_FOSSIL] =
+    {
+        .name = ITEM_NAME("Scarlet Fossil"),
+        .price = (I_PRICE >= GEN_7) ? 1 : 1,
+        .description = COMPOUND_STRING(
+            "A fossil that\n"
+            "reverts Pokémon\n"
+            "to their past."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_EVOLUTION_ITEM,
+        .type = EVO_HELD_ITEM_TYPE,
+        .fieldUseFunc = EVO_HELD_ITEM_FIELD_FUNC,
+        .effect = gItemEffect_EvoItem,
+        .flingPower = 50,
+        .iconPic = gItemIcon_OldAmber,
+        .iconPalette = gItemIconPalette_OldAmber,
+    },
+
+    [ITEM_VIOLET_CIRCUIT] =
+    {
+        .name = ITEM_NAME("Violet Circuit"),
+        .price = (I_PRICE >= GEN_7) ? 1 : 1,
+        .description = COMPOUND_STRING(
+            "A circuit that\n"
+            "advances Pokémon\n"
+            "to their futures."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_EVOLUTION_ITEM,
+        .type = EVO_HELD_ITEM_TYPE,
+        .fieldUseFunc = EVO_HELD_ITEM_FIELD_FUNC,
+        .effect = gItemEffect_EvoItem,
+        .flingPower = 50,
+        .iconPic = gItemIcon_DubiousDisc,
+        .iconPalette = gItemIconPalette_DubiousDisc,
+    },
+
 // Nectars
 
     [ITEM_RED_NECTAR] =

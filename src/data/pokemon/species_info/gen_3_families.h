@@ -2805,6 +2805,9 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
                             #if P_GEN_4_CROSS_EVOS
                                 ,{EVO_ITEM, ITEM_DAWN_STONE, SPECIES_GALLADE, CONDITIONS({IF_GENDER, MON_MALE})}
                             #endif
+                            #if P_GEN_9_CROSS_EVOS
+                                ,{EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_VALIANT}
+                            #endif
                             ),
     },
 
@@ -4172,7 +4175,12 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .levelUpLearnset = sMakuhitaLevelUpLearnset,
         .teachableLearnset = sMakuhitaTeachableLearnset,
         .eggMoveLearnset = sMakuhitaEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HARIYAMA}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 24, SPECIES_HARIYAMA}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_HANDS}
+            #endif
+        ),
     },
 
     [SPECIES_HARIYAMA] =
@@ -11523,7 +11531,12 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         )
         .levelUpLearnset = sShelgonLevelUpLearnset,
         .teachableLearnset = sShelgonTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_SALAMENCE}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 50, SPECIES_SALAMENCE}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_ROARING_MOON}
+            #endif
+        ),
     },
 
     [SPECIES_SALAMENCE] =
