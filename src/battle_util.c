@@ -11520,6 +11520,10 @@ enum Ability GetBattlerTrait(u8 battlerId, u8 traitNum, u32 ignoreMoldBreaker)
 
     enum Ability ability = ABILITIES_COUNT;
 
+    struct Pokemon *party = GetBattlerParty(battlerId);
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battlerId]];
+    u8 innatesToUnlock = GetMonData(mon, MON_DATA_INNATE_UNLOCKS);
+
     #if TESTING
     if (gTestRunnerEnabled)
     {
@@ -11552,9 +11556,11 @@ enum Ability GetBattlerTrait(u8 battlerId, u8 traitNum, u32 ignoreMoldBreaker)
     else
     {
         // Load natural Innate if not a Test
-        if (ability == ABILITIES_COUNT)
-            ability = GetSpeciesInnate(gBattleMons[battlerId].species, traitNum);
-        
+        if (ability == ABILITIES_COUNT) {
+            if (traitNum < innatesToUnlock) {
+                ability = GetSpeciesInnate(gBattleMons[battlerId].species, traitNum);
+            }
+        }
         //DebugPrintf("Trait %d: %S", traitNum, gAbilitiesInfo[ability].name);
         
         // Check if ability is nullified

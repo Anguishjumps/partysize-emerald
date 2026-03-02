@@ -129,6 +129,7 @@ enum MonData {
     MON_DATA_INNATE1,
     MON_DATA_INNATE2,
     MON_DATA_INNATE3,
+    MON_DATA_INNATE_UNLOCKS,
 };
 
 struct PokemonSubstruct0
@@ -144,7 +145,7 @@ struct PokemonSubstruct0
     u8 friendship;
     u16 pokeball:6; // 63 balls.
     u16 nickname12:8; // 12th character of nickname.
-    u16 unused_0A:2;
+    u16 innate_unlocks:2; //Charlotte Here
 };
 
 struct PokemonSubstruct1
@@ -219,7 +220,7 @@ struct PokemonSubstruct3
     u32 earthRibbon:1;    // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
     u32 worldRibbon:1;    // Distributed during Pokémon Festa '04 and '05 to tournament winners.
     u32 isShadow:1;
-    u32 unused_0B:1;
+    u32 unused_0A:1;
     u32 abilityNum:2;
 
     // The functionality of this bit changed in FRLG:
@@ -925,6 +926,7 @@ void SavePlayerPartyMon(u32 index, struct Pokemon *mon);
 bool32 IsSpeciesOfType(u32 species, enum Type type);
 
 u8 SpeciesHasInnate(u16 species, u16 ability);
+u8 MonHasInnate(u16 species, u16 ability, u8 innatesToUnlock);
 enum Ability GetSpeciesInnate(u16 species, u8 traitNum);
 bool8 BoxMonHasInnate(struct BoxPokemon* boxmon, u16 ability);
 bool8 MonHasTrait(struct Pokemon* mon, u16 ability);

@@ -333,7 +333,6 @@ static void Task_ReturnToChooseMonAfterText(u8);
 static void UpdateCurrentPartySelection(s8 *, s8);
 static void UpdatePartySelectionSingleLayout(s8 *, s8);
 static void UpdatePartySelectionDoubleLayout(s8 *, s8);
-static s8 GetNewSlotDoubleLayout(s8, s8);
 static void PrintMessage(const u8 *);
 static void Task_PrintAndWaitForText(u8);
 static bool16 IsMonAllowedInPokemonJump(struct Pokemon *);
@@ -1876,18 +1875,6 @@ static void UpdatePartySelectionDoubleLayout(s8 *slotPtr, s8 movementDir)
             *slotPtr -= 1;
         }
         break;
-    }
-}
-
-static s8 GetNewSlotDoubleLayout(s8 slotId, s8 movementDir)
-{
-    while (TRUE)
-    {
-        slotId += movementDir;
-        if ((u8)slotId >= PARTY_SIZE)
-            return -1;
-        if (GetMonData(&gPlayerParty[slotId], MON_DATA_SPECIES) != SPECIES_NONE)
-            return slotId;
     }
 }
 

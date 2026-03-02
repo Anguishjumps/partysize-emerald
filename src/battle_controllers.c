@@ -1434,6 +1434,8 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
         StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&party[monId], MON_DATA_OT_NAME, battleMon.otName);
 
+        u8 innatesToUnlock = GetMonData(&party[monId], MON_DATA_INNATE_UNLOCKS);
+
          for (i = 0; i < MAX_MON_INNATES; i++)
          {
              #if TESTING
@@ -1444,7 +1446,12 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
                  gBattleMons[battler].innates[i] = TestRunner_Battle_GetForcedInnates(array, monId, i);
              }
              #else
+                if (i < innatesToUnlock) {
                  battleMon.innates[i] = GetSpeciesInnate(battleMon.species, i + 1);
+                }
+                else {
+                 battleMon.innates[i] = ABILITY_NONE;
+                }
              #endif
          }
 
