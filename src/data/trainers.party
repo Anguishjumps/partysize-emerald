@@ -4684,9 +4684,9 @@ Mugshot: Green
 
 Gengar
 Ability: Cursed Body
-Level: 97
+Level: 98
 Timid Nature
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+IVs: 0 Atk
 - Nasty Plot
 - Confuse Ray
 - Shadow Ball
@@ -4704,7 +4704,6 @@ IVs: 0 Atk
 
 Sableye @ Sablenite
 Level: 99
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Shadow Ball
 - Double Team
 - Night Shade
@@ -4864,7 +4863,6 @@ Class: Leader
 Pic: Leader Roxanne
 Gender: Female
 Music: Female
-Items: Potion / Potion
 Double Battle: No
 AI: Basic Trainer
 
@@ -4924,6 +4922,8 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Tackle
 - Rock Tomb
 
+/*miniboss here, level cap 20-21*/
+
 === TRAINER_BRAWLY_1 ===
 Name: BRAWLY
 Class: Leader
@@ -4935,15 +4935,42 @@ Double Battle: No
 AI: Basic Trainer
 
 Machop
-Level: 16
+Level: 23
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Karate Chop
 - Low Kick
 - Seismic Toss
 - Bulk Up
 
+Falinks
+Ability: Defiant
+Level: 24
+Adamant Nature
+- No Retreat
+- Iron Head
+- Rock Smash
+- Bug Bite
+
+Hitmontop
+Ability: Technician
+Level: 24
+Adamant Nature
+- Mach Punch
+- Triple Axel
+- Aerial Ace
+- Bulldoze
+
+Hawlucha @ Sitrus Berry
+Ability: Unburden
+Level: 25
+Jolly Nature
+- Flying Press
+- Acrobatics
+- Fire Punch
+- U-turn
+
 Meditite
-Level: 16
+Level: 23
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Focus Punch
 - Light Screen
@@ -4951,12 +4978,22 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Bulk Up
 
 Makuhita @ Sitrus Berry
-Level: 19
+Level: 24
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Arm Thrust
 - Vital Throw
 - Reversal
 - Bulk Up
+
+Pawmo @ Eviolite
+Ability: Iron Fist
+Level: 24
+- Fake Out
+- Mach Punch
+- Thunder Punch
+- Sweet Kiss
+
+/*miniboss here, level cap 30ish*/
 
 === TRAINER_WATTSON_1 ===
 Name: WATTSON
@@ -4969,23 +5006,24 @@ Double Battle: No
 AI: Basic Trainer
 
 Electrode @ Focus Sash
-Level: 22
+Level: 34
 Jolly Nature
 - Agility
 - Spark
 - Self Destruct
 - Shock Wave
 
-Electrike
-Level: 20
-IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
-- Shock Wave
-- Leer
-- Quick Attack
-- Howl
+Raichu @ Leftovers
+Ability: Static  
+Level: 36  
+Jolly Nature  
+- Trailblaze  
+- Drain Punch  
+- Iron Tail  
+- Volt Tackle
 
 Magneton
-Level: 22
+Level: 35
 IVs: 26 HP / 26 Atk / 26 Def / 26 SpA / 26 SpD / 26 Spe
 - Supersonic
 - Shock Wave
@@ -4993,7 +5031,7 @@ IVs: 26 HP / 26 Atk / 26 Def / 26 SpA / 26 SpD / 26 Spe
 - Sonic Boom
 
 Manectric @ Sitrus Berry
-Level: 24
+Level: 35
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Quick Attack
 - Thunder Wave
@@ -5001,15 +5039,15 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Howl
 
 Galvantula
-Level: 25
+Level: 34
 - Electroweb
 - Bug Buzz
 - Volt Switch
-- Poison Jab
+- Sludge Bomb
 
 Raichu-Alola  
 Ability: Surge Surfer
-Level: 24
+Level: 36
 Timid Nature
 - Nasty Plot  
 - Thunderbolt  
@@ -5018,12 +5056,14 @@ Timid Nature
 
 Rotom-Wash @ Leftovers
 Ability: Levitate
-Level: 24
+Level: 35
 Bold Nature
 - Will-O-Wisp
 - Hydro Pump
 - Shadow Ball
 - Volt Switch
+
+/*miniboss here, level cap 40-42, maybe a second one at level 45*/
 
 === TRAINER_FLANNERY_1 ===
 Name: FLANNERY
@@ -5035,6 +5075,15 @@ Items: Hyper Potion / Hyper Potion
 Double Battle: No
 AI: Basic Trainer
 
+Ninetales @ White Herb
+Ability: Drought
+Level: 49
+IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+- Overheat
+- Solar Beam
+- Will-O-Wisp
+- Attract
+
 Numel
 Level: 24
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
@@ -5042,6 +5091,30 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Take Down
 - Magnitude
 - Sunny Day
+
+Arcanine-Hisui
+Ability: Rock Head
+Level: 49
+- Flare Blitz
+- Head Smash
+- Double Edge
+- Fire Fang
+
+Incineroar @ Assault Vest
+Ability: Intimidate
+Level: 49
+- Fake Out
+- U-turn
+- Flare Blitz
+- Knock Off
+
+Lilligant
+Ability: Chlorophyll
+Level: 49
+- Quiver Dance
+- Giga Drain
+- Weather Ball
+- Moonblast
 
 Slugma
 Level: 24
@@ -5059,13 +5132,15 @@ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 - Sunny Day
 - Attract
 
-Torkoal @ White Herb
-Level: 29
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
-- Overheat
-- Sunny Day
-- Body Slam
-- Attract
+Delphox @ Leftovers  
+Ability: Blaze  
+Level: 50
+Timid Nature  
+IVs: 0 Atk  
+- Psychic  
+- Heat Wave  
+- Dazzling Gleam  
+- Calm Mind
 
 === TRAINER_NORMAN_1 ===
 Name: NORMAN
@@ -5093,6 +5168,24 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Encore
 - Feint Attack
 
+Porygon2 @ Eviolite
+Ability: Download
+Level: 54
+Quiet Nature
+- Tri Attack
+- Shadow Ball
+- Thunder Wave
+- Recover
+
+Bewear @ Muscle Band
+Ability: Fluffy
+Level: 54
+Adamant Nature
+- Double-Edge
+- Superpower
+- Earthquake
+- Drain Punch
+
 Linoone
 Level: 29
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
@@ -5102,12 +5195,31 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Headbutt
 
 Slaking @ Sitrus Berry
-Level: 31
-IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+Level: 54
+Adamant Nature
 - Counter
 - Yawn
 - Facade
 - Feint Attack
+
+Lopunny
+Level: 54
+Jolly Nature
+- Retaliate
+- Knock Off
+- Play Rough
+- Mach Punch
+
+Kangaskhan-Mega @ Kangaskhanite  
+Ability: Inner Focus  
+Level: 55
+Jolly Nature  
+- Fake Out  
+- Return  
+- Earthquake  
+- Sucker Punch
+
+/*miniboss here probably winstitute lv 60ish*/
 
 === TRAINER_WINONA_1 ===
 Name: WINONA
@@ -5115,7 +5227,6 @@ Class: Leader
 Pic: Leader Winona
 Gender: Female
 Music: Female
-Items: Hyper Potion / Hyper Potion
 Double Battle: No
 AI: Basic Trainer / Risky
 
@@ -5159,15 +5270,117 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Dance
 - Aerial Ace
 
+Iron Jugulis  
+Ability: Super Luck  
+Level: 65
+Timid Nature  
+IVs: 0 Atk  
+- Heat Wave  
+- Hurricane  
+- Dark Pulse  
+- Dragon Pulse
+
+Staraptor @ Leftovers
+Ability: Reckless
+Level: 65
+Adamant Nature
+- Brave Bird
+- Close Combat
+- U-turn
+- Double-Edge
+
+/*
+=== TRAINER_LUSAMINE ===
+Name: Lusamine
+Class: Trainer
+Pic: Lusamine
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer / Risky
+
+Clefable
+Ability: Magic Guard
+Level: 68
+- Moonblast
+- Psychic
+- Hyper Voice
+- Charm
+
+Lilligant
+Ability: Own Tempo
+Level: 68
+- Leech Seed
+- Petal Dance
+- Teeter Dance
+- Stun Spore
+
+Mismagius
+Ability: Levitate
+Level: 69
+- Shadow Ball
+- Power Gem
+- Mystical Fire
+- Calm Mind
+
+Milotic
+Ability: Marvel Scale
+Level: 69
+- Hydro Pump
+- Icy Wind
+- Recover
+- Dragon Pulse
+
+Bewear
+Ability: Fluffy
+Level: 68
+- Zen Headbutt
+- Dual Chop
+- Drain Punch
+- Double Edge
+
+Lopunny
+Ability: Iron Fist
+Level: 69
+- Dizzy Punch
+- Thunder Punch
+- Fire Punch
+- Ice Punch
+
+Silvally
+Ability: RKS System
+Level: 70
+- Multi-Attack
+- Pursuit
+- U-turn
+- Flame Charge
+
+Nihilego
+Ability: Beast Boost
+Level: 70
+- Sludge Wave
+- Power Gem
+- Psychic
+- Dazzling Gleam
+*/
+
 === TRAINER_TATE_AND_LIZA_1 ===
 Name: TATE&LIZA
 Class: Leader
 Pic: Leader Tate And Liza
 Gender: Male
 Music: Female
-Items: Hyper Potion / Hyper Potion / Hyper Potion / Hyper Potion
 Double Battle: Yes
 AI: Basic Trainer
+
+Indeedee-F  
+Ability: Psychic Surge  
+Level: 74   
+Hasty Nature  
+- Psychic  
+- Shadow Ball  
+- Dazzling Gleam  
+- Fake Out
 
 Claydol
 Level: 41

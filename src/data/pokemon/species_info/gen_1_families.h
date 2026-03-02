@@ -5592,7 +5592,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         )
         .levelUpLearnset = sJigglypuffLevelUpLearnset,
         .teachableLearnset = sJigglypuffTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_WIGGLYTUFF}),
+        .evolutions = EVOLUTION(
+            {EVO_ITEM, ITEM_MOON_STONE, SPECIES_WIGGLYTUFF}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_SCREAM_TAIL}
+            #endif
+        ),
     },
 
 #if P_UPDATED_STATS >= GEN_6
@@ -10829,7 +10834,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         )
         .levelUpLearnset = sMagnemiteLevelUpLearnset,
         .teachableLearnset = sMagnemiteTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGNETON}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 30, SPECIES_MAGNETON}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_SANDY_SHOCKS}
+            #endif
+        ),
     },
 
     [SPECIES_MAGNETON] =
