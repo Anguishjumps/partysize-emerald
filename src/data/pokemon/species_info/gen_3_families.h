@@ -4273,6 +4273,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
         .abilities = { ABILITY_STURDY, ABILITY_MAGNET_PULL, ABILITY_SAND_FORCE },
+        .innates = { ABILITY_INTIMIDATE, ABILITY_SPEED_BOOST, ABILITY_INNARDS_OUT },
+
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Nosepass"),
         .cryId = CRY_NOSEPASS,

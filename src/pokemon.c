@@ -1215,6 +1215,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
 
+    value = 0;
+    SetBoxMonData(boxMon, MON_DATA_INNATE_UNLOCKS, &value);
+
+
     GiveBoxMonInitialMoveset(boxMon);
 }
 
@@ -2564,6 +2568,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_WORLD_RIBBON:
             retVal = GetSubstruct3(boxMon)->worldRibbon;
             break;
+        case MON_DATA_INNATE_UNLOCKS:
+            retVal = GetSubstruct0(boxMon)->innate_unlocks;
+            break;
         case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
             retVal = GetSubstruct3(boxMon)->modernFatefulEncounter;
             break;
@@ -3073,6 +3080,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_WORLD_RIBBON:
             SET8(GetSubstruct3(boxMon)->worldRibbon);
+            break;
+        case MON_DATA_INNATE_UNLOCKS:
+            SET8(GetSubstruct0(boxMon)->innate_unlocks);
             break;
         case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
             SET8(GetSubstruct3(boxMon)->modernFatefulEncounter);
@@ -3663,9 +3673,18 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     for (i = 0; i < NUM_BATTLE_STATS; i++)
         dst->statStages[i] = DEFAULT_STAT_STAGE;
 
+    u8 innatesToUnlock = GetMonData(src, MON_DATA_INNATE_UNLOCKS);
+
     for (i = 0; i < MAX_MON_INNATES; i++)
     {
-        dst->innates[i] = GetSpeciesInnate(dst->species, i + 1);
+        if (i < innatesToUnlock) {
+            dst->innates[i] = GetSpeciesInnate(dst->species, i + 1);
+        }
+        else 
+        {
+            dst->innates[i] = ABILITY_NONE;
+
+        }
     }
 
     memset(&dst->volatiles, 0, sizeof(struct Volatiles));
@@ -3779,6 +3798,12 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             {
                 u8 param = GetItemHoldEffectParam(item);
                 dataUnsigned = 0;
+                
+                u32 unlocks = GetMonData(mon, MON_DATA_INNATE_UNLOCKS) + 1;
+                if (unlocks > MAX_MON_INNATES) {
+                    unlocks = MAX_MON_INNATES;
+                }
+                SetMonData(mon, MON_DATA_INNATE_UNLOCKS, &unlocks);
 
                 if (param == 0) // Rare Candy
                 {
@@ -5570,6 +5595,10 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     else
     {
         SetMonData(mon, MON_DATA_LEVEL, &nextLevel);
+        u32 unlocks = 3;
+        if (nextLevel >= 20) {
+            SetMonData(mon, MON_DATA_INNATE_UNLOCKS, &unlocks);
+        }
         return TRUE;
     }
 }
@@ -7508,18 +7537,36 @@ u8 SpeciesHasInnate(u16 species, u16 ability) {
         return innateNum;
 }
 
-bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability)
+u8 MonHasInnate(u16 species, u16 ability, u8 innatesToUnlock) {
+    u8 i;
+    u8 innateNum = 0;
+
+    for (i = 0; i < innatesToUnlock; i++)
+    {   
+        if (gSpeciesInfo[species].innates[i] == ability)
+            {
+                innateNum = i + 2;
+                //DebugPrintf("INNATE FOUND: %d", innateNum - 1);
+            }
+    }
+
+        return innateNum;
+}
+
+bool8 BoxMonHasInnate(struct BoxPokemon *boxmon, u16 ability) //Unused?
 {
     u16 species = GetBoxMonData(boxmon, MON_DATA_SPECIES, NULL);
+    u8 innatesToUnlock = GetBoxMonData(boxmon, MON_DATA_INNATE_UNLOCKS);
 
-    return SpeciesHasInnate(species, ability);
+    return MonHasInnate(species, ability, innatesToUnlock);
 }
 
 bool8 MonHasTrait(struct Pokemon *mon, u16 ability)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 innatesToUnlock = GetMonData(mon, MON_DATA_INNATE_UNLOCKS);
 
-    return (GetMonAbility(mon) == ability || SpeciesHasInnate(species, ability));
+    return (GetMonAbility(mon) == ability || MonHasInnate(species, ability, innatesToUnlock));
 } 
 
 enum Ability GetSpeciesInnate(u16 species, u8 traitNum)

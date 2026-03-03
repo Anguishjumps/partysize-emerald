@@ -1625,9 +1625,15 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
         break;
     case 4:
+        u8 innatesToUnlock = GetMonData(mon, MON_DATA_INNATE_UNLOCKS);
         for (i = 0; i < MAX_MON_INNATES; i++)
-        {
-            sum->innates[i] = GetMonData(mon, MON_DATA_INNATE1 + i);
+        {   
+            if (i < innatesToUnlock) {
+            sum->innates[i] = GetSpeciesInnate(sum->species, i + 1);;
+            }
+            else {
+            sum->innates[i] = ABILITY_NONE;
+            }
         }
         break;
     default:
@@ -3964,8 +3970,8 @@ static void PrintMonTraits(u8 innateIndex)
     if (innateIndex == 0)
         trait = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
     else if (innateIndex <= MAX_MON_INNATES)
-        trait = gSpeciesInfo[sum->species].innates[innateIndex-1];
-        
+        trait = sum->innates[innateIndex - 1];
+    
     int x = GetStringRightAlignXOffset(FONT_NORMAL, gAbilitiesInfo[trait].name, 18*8);
 
     if (trait == 0)
