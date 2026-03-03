@@ -4857,6 +4857,40 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rock Slide
 - Crunch
 
+=== TRAINER_CYNTHIA ===
+Name: Cynthia
+Class: Champion
+Pic: Cynthia
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Feebas
+Level: 5
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Tackle
+- Splash
+- Leer
+- Water Sport
+
+=== TRAINER_LUSAMINE ===
+Name: Lusamine
+Class: Champion
+Pic: Lusamine
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+
+Magikarp
+Level: 5
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Tackle
+- Splash
+- Leer
+- Water Sport
+
 === TRAINER_ROXANNE_1 ===
 Name: ROXANNE
 Class: Leader
@@ -6609,9 +6643,9 @@ Level: 13
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WALLACE ===
-Name: WALLACE
+Name: STEVEN
 Class: Champion
-Pic: Champion Wallace
+Pic: Steven
 Gender: Male
 Music: Male
 Items: Full Restore / Full Restore / Full Restore / Full Restore
@@ -6619,7 +6653,7 @@ Double Battle: No
 AI: Basic Trainer
 Mugshot: Yellow
 
-Wailord
+Hippowdon
 Level: 57
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Rain Dance
@@ -6627,7 +6661,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Double Edge
 - Blizzard
 
-Tentacruel
+Aggron
 Level: 55
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Toxic
@@ -6635,7 +6669,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sludge Bomb
 - Ice Beam
 
-Ludicolo
+Archaludon
 Level: 56
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Giga Drain
@@ -6643,7 +6677,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Leech Seed
 - Double Team
 
-Whiscash
+Metagross @ Metagrossite
 Level: 56
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
@@ -6651,7 +6685,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Amnesia
 - Hyper Beam
 
-Gyarados
+Great Tusk
 Level: 56
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Dragon Dance
@@ -6659,7 +6693,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Hyper Beam
 - Surf
 
-Urshifu-Rapid-Strike @ Life Orb
+Kingambit @ Life Orb
 Level: 58   
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Surging Strikes  
@@ -6667,19 +6701,19 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Detect  
 - U-turn  
 
-Golisopod @ Sitrus Berry  
+Corviknight @ Sitrus Berry  
 Level: 57
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- First Impression  
-- Liquidation  
-- Leech Life  
+- Iron Defense  
+- Body Press  
+- Brave Bird
 - Protect  
 
-Palkia @ Lustrous Orb  
+Dialga @ Adamant Orb  
 Level: 58
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-- Spacial Rend  
-- Hydro Pump  
+- Roar Of Time  
+- Flash Cannon  
 - Draco Meteor  
 - Thunder Wave  
 
@@ -11632,8 +11666,8 @@ Wailmer
 Level: 39
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
-=== TRAINER_RICK ===
-Name: RICK
+=== TRAINER_HANA ===
+Name: HANA
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -11641,35 +11675,23 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Flareon
+Mudkip
 Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Jolteon
+Sewaddle
 Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Vaporeon
+Caterpie
 Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Umbreon
+Shroomish
 Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Espeon
-Level: 3
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Glaceon
-Level: 3
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Leafeon
-Level: 3
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Sylveon
+Pidgey
 Level: 3
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 

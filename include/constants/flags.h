@@ -1225,8 +1225,8 @@
 #define FLAG_BUZZWOLE_BACK_TO_BACK_TRAINERS_DEFEATED                0x493 // Unused Flag
 #define FLAG_BUZZWOLE_HIDE_BACK_TO_BACK_TRAINER_1                   0x494 // Unused Flag
 #define FLAG_BUZZWOLE_HIDE_BACK_TO_BACK_TRAINER_2                   0x495 // Unused Flag
-#define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
+#define FLAG_RUSTBORO_CYNTHIA_DEFEATED                              0x496 // Unused Flag
+#define FLAG_RUSTBORO_LUSAMINE_DEFEATED                             0x497 // Unused Flag
 #define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag

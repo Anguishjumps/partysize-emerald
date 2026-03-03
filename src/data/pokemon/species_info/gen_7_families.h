@@ -4230,11 +4230,11 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 #if P_FAMILY_PYUKUMUKU
     [SPECIES_PYUKUMUKU] =
     {
-        .baseHP        = 55,
-        .baseAttack    = 60,
+        .baseHP        = 75,
+        .baseAttack    = 90,
         .baseDefense   = 130,
         .baseSpeed     = 5,
-        .baseSpAttack  = 30,
+        .baseSpAttack  = 20,
         .baseSpDefense = 130,
         .types = MON_TYPES(TYPE_WATER),
         .catchRate = 60,
@@ -4245,7 +4245,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
-        .abilities = { ABILITY_INNARDS_OUT, ABILITY_NONE, ABILITY_UNAWARE },
+        .abilities = { ABILITY_INNARDS_OUT, ABILITY_POISON_POINT, ABILITY_UNAWARE },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Pyukumuku"),
         .cryId = CRY_PYUKUMUKU,
