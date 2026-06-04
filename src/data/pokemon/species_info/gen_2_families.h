@@ -3943,9 +3943,14 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sMisdreavusLevelUpLearnset,
         .teachableLearnset = sMisdreavusTeachableLearnset,
         .eggMoveLearnset = sMisdreavusEggMoveLearnset,
-    #if P_GEN_4_CROSS_EVOS
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MISMAGIUS}),
-    #endif
+    .evolutions = EVOLUTION(
+        #if P_GEN_4_CROSS_EVOS
+            {EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MISMAGIUS}
+        #endif
+        #if P_GEN_9_CROSS_EVOS
+            ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_FLUTTER_MANE}
+        #endif
+    ),
     },
 
 #if P_GEN_4_CROSS_EVOS
@@ -7003,6 +7008,9 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sDelibirdLevelUpLearnset,
         .teachableLearnset = sDelibirdTeachableLearnset,
         .eggMoveLearnset = sDelibirdEggMoveLearnset,
+        #if P_GEN_9_CROSS_EVOS
+            .evolutions = EVOLUTION({EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_BUNDLE}),
+        #endif
     },
 #endif //P_FAMILY_DELIBIRD
 
@@ -7576,7 +7584,13 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .levelUpLearnset = sPhanpyLevelUpLearnset,
         .teachableLearnset = sPhanpyTeachableLearnset,
         .eggMoveLearnset = sPhanpyEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_DONPHAN}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 25, SPECIES_DONPHAN}
+        #if P_GEN_9_CROSS_EVOS
+            ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_GREAT_TUSK}
+            ,{EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_TREADS}
+        #endif
+        ),
     },
 
     [SPECIES_DONPHAN] =
@@ -8333,7 +8347,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         )
         .levelUpLearnset = sPupitarLevelUpLearnset,
         .teachableLearnset = sPupitarTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 55, SPECIES_TYRANITAR}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 55, SPECIES_TYRANITAR}
+        #if P_GEN_9_CROSS_EVOS
+            ,{EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_THORNS}
+        #endif
+        ),
     },
 
     [SPECIES_TYRANITAR] =

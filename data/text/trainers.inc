@@ -46,14 +46,14 @@ Route102_Text_AllenPostBattle:
 	.string "I haven't won once yet…\n"
 	.string "I wish I would win soon…$"
 
-Route102_Text_RickIntro:
+Route102_Text_HanaIntro:
 	.string "Hahah! Our eyes met!\n"
 	.string "I'll take you on with my BUG POKéMON!$"
 
-Route102_Text_RickDefeated:
+Route102_Text_HanaDefeated:
 	.string "Ow! Down and out!$"
 
-Route102_Text_RickPostBattle:
+Route102_Text_HanaPostBattle:
 	.string "If you lock eyes with a TRAINER,\n"
 	.string "you have to challenge! It's a rule!$"
 

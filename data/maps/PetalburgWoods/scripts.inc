@@ -503,16 +503,22 @@ PetalburgWoods_Text_TrainerTipsPP:
 	.string "taken to a POKéMON CENTER.$"
 
 BackToBack_Text_Intro1:
-    .string "Dialogue Before back-to-back!$"
+    .string "What? What's a kid doing here?\n"
+	.string "You're getting in the way of\p"
+	.string "our important mission!$"
 
 BackToBack_Text_Before2:
-    .string "Dialogue in between fights!$"
+    .string "What?? You brat! How could you win?\n"
+	.string "I'll get you for that!!$"
 
 BackToBack_Text_Lose1:
-	.string "I lost!$"
+	.string "Fuck!!$"
 
 BackToBack_Text_Lose2:
-	.string "I also lost!$"
+	.string "Shit!$"
 
 BackToBack_Text_After:
-    .string "Dialogue after$"
+    .string "You beat both of us? Oh no...\n"
+	.string "We better go report this back to\p"
+	.string "Archie... I hope he doesn't get too\n"
+	.string "mad at us about this...$"

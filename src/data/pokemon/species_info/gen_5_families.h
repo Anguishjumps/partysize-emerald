@@ -8714,7 +8714,12 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sFoongusLevelUpLearnset,
         .teachableLearnset = sFoongusTeachableLearnset,
         .eggMoveLearnset = sFoongusEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_AMOONGUSS}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 39, SPECIES_AMOONGUSS}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_BRUTE_BONNET}
+            #endif
+        ),
     },
 
     [SPECIES_AMOONGUSS] =
@@ -12230,7 +12235,12 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sZweilousLevelUpLearnset,
         .teachableLearnset = sZweilousTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 64, SPECIES_HYDREIGON}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 64, SPECIES_HYDREIGON}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_JUGULIS}
+            #endif
+        ),
     },
 
     [SPECIES_HYDREIGON] =
@@ -12382,7 +12392,13 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .levelUpLearnset = sLarvestaLevelUpLearnset,
         .teachableLearnset = sLarvestaTeachableLearnset,
         .eggMoveLearnset = sLarvestaEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 59, SPECIES_VOLCARONA}),
+        .evolutions = EVOLUTION(
+            {EVO_LEVEL, 59, SPECIES_VOLCARONA}
+            #if P_GEN_9_CROSS_EVOS
+                ,{EVO_ITEM, ITEM_VIOLET_CIRCUIT, SPECIES_IRON_MOTH}
+                ,{EVO_ITEM, ITEM_SCARLET_FOSSIL, SPECIES_SLITHER_WING}
+            #endif
+        ),
     },
 
     [SPECIES_VOLCARONA] =

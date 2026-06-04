@@ -618,7 +618,7 @@
 #define TRAINER_ROBIN                       612
 #define TRAINER_ANDREA                      613
 #define TRAINER_CRISSY                      614
-#define TRAINER_RICK                        615
+#define TRAINER_HANA                        615
 #define TRAINER_LYLE                        616
 #define TRAINER_JOSE                        617
 #define TRAINER_DOUG                        618
@@ -860,12 +860,14 @@
 #define TRAINER_MAY_PLACEHOLDER             854
 #define TRAINER_BUZZWOLE_GRUNT_1            855
 #define TRAINER_BUZZWOLE_GRUNT_2            856
+#define TRAINER_CYNTHIA                     857
+#define TRAINER_LUSAMINE                    858
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 (now 7 since scarlet just added 2) additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      857
+#define TRAINERS_COUNT                      859
 #define MAX_TRAINERS_COUNT                  864
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 

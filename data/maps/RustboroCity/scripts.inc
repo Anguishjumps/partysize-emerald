@@ -1014,6 +1014,52 @@ RustboroCity_EventScript_Boy1::
 	msgbox RustboroCity_Text_YouCanHave2On2Battle, MSGBOX_NPC
 	end
 
+RustboroCity_Cynthia::
+	lock
+	faceplayer
+	goto_if_set FLAG_RUSTBORO_CYNTHIA_DEFEATED, RustboroCity_Cynthia_PostBattleSpeech
+	msgbox RustboroCity_Cynthia_Text_Intro, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_CYNTHIA, RustboroCity_Cynthia_Text_Defeat
+	setflag FLAG_RUSTBORO_CYNTHIA_DEFEATED
+	end
+
+RustboroCity_Cynthia_PostBattleSpeech:
+    msgbox RustboroCity_Cynthia_PostBattle_Text, MSGBOX_DEFAULT
+	release
+    end
+
+RustboroCity_Lusamine::
+	lock
+	faceplayer
+	goto_if_set FLAG_RUSTBORO_LUSAMINE_DEFEATED, RustboroCity_Cynthia_PostBattleSpeech
+	msgbox RustboroCity_Lusamine_Text_Intro, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_LUSAMINE, RustboroCity_Lusamine_Text_Defeat
+	setflag FLAG_RUSTBORO_LUSAMINE_DEFEATED
+	end
+
+RustboroCity_Lusamine_PostBattleSpeech:
+    msgbox RustboroCity_Lusamine_PostBattle_Text, MSGBOX_DEFAULT
+	release
+    end
+
+RustboroCity_Cynthia_Text_Intro:
+	.string "Hi! I'm Cynthia!$"
+
+RustboroCity_Cynthia_Text_Defeat:
+	.string "I lost!$"
+
+RustboroCity_Cynthia_PostBattle_Text:
+	.string "Death to America!$"
+
+RustboroCity_Lusamine_Text_Intro:
+	.string "Hi! I'm Lusamine!$"
+
+RustboroCity_Lusamine_Text_Defeat:
+	.string "I lost!$"
+
+RustboroCity_Lusamine_PostBattle_Text:
+	.string "Death to America!$"
+
 RustboroCity_Text_WeShortenItToDevon:
 	.string "The DEVON CORPORATION…\n"
 	.string "We all just shorten it to DEVON.\p"
